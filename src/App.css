@@ -60,12 +60,14 @@ h1, h2, h3, h4, h5, h6 {
 
 /*--------------------*/
 /* общие стили кнопки и текста */
-
 .wrapper {
-  min-height: 100%;
+  min-height: 100vh;
   display: grid;
   grid-template: 50px 1fr/ 1fr;
-  grid-template-areas: "header" "body"; }
+  grid-template-areas:
+   "header"
+   "page";
+   }
 
 .header {
   grid-area: header;
@@ -90,9 +92,9 @@ h1, h2, h3, h4, h5, h6 {
   grid-template-columns: repeat(auto-fit, minmax(30px, 1fr)); }
 
 .body {
-  grid-area: body;
+  grid-area: page;
   display: grid;
-  grid-template: 100fr 50px / minmax(200px, 730px); }
+  grid-template: 1fr 50px/minmax(200px, 730px); }
   .body .content {
     grid-row: 1 / 2;
     background-color: #8be6fa; }
@@ -111,10 +113,9 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (min-width: 730px) {
   .body {
-    grid-area: body;
+    grid-area: page;
     gap: 10px;
-    grid-template: 1fr / 1fr 150px minmax(550px, 800px) 1fr; }
-    
+    grid-template: 1fr/1fr 150px minmax(550px, 800px) 1fr; }
     .body .navbar {
       grid-column: 2 / 3;
       grid-row: 1 / 2; }
@@ -130,7 +131,6 @@ h1, h2, h3, h4, h5, h6 {
           display: inline; }
     .body .content {
       grid-column: 3 / 4;
-      grid-row: 1 / 2;
       background-color: #8be6fa; } }
 
 /*# sourceMappingURL=style.css.map */
