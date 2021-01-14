@@ -1,0 +1,31 @@
+.header {
+	position: fixed;
+	height: 50px;
+	width: 100%;
+	grid-area: header;
+	background-color:#424283;
+	
+
+	align-items: center;
+	display: grid;
+	gap: 10px;
+	grid-template: 1fr / 1fr minmax(auto, 150px) minmax(150px, 800px) 1fr;
+}
+.header__logo {
+	width: 50px;
+	& img{
+		max-height: 100%;
+		max-width: 100%;
+	}
+	grid-column: 2 / 3;
+}
+.header__menu {
+	
+	grid-column: 3 / 4;
+	display: grid;
+	grid-auto-flow: column;
+	justify-items: center;
+	grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+
+
+}

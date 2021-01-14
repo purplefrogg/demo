@@ -1,0 +1,28 @@
+.post{
+    background-color: #2d2d59;
+    margin: 10px 0;
+    padding: 10px;
+  
+    .author{
+        padding: 15px 0 0 70px;
+        line-height: 20px;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    & img{
+        
+        max-width: 100%;
+    }
+}
+
+.header{
+    height: 50px;
+    .image{
+        & img{
+            float: left;
+            width: 50px;
+            border-radius: 50%;
+        }
+    }
+    margin: 0 0 20px 0;
+}

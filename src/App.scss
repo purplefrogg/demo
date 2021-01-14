@@ -1,112 +1,13 @@
+body{
+	background-color: #181732;
+}
 .wrapper{
 	min-height: 100vh;
 	display: grid;
 	grid-template: 50px 1fr/ 1fr;
-
+	
 	grid-template-areas:
 		"header"
 		"body";
-
-}
-.header {
-	position: fixed;
-	height: 50px;
-	width: 100%;
-	grid-area: header;
-	background-color: #affa8b;
-
-	align-items: center;
-	display: grid;
-	gap: 10px;
-	grid-template: 1fr / 1fr minmax(auto, 150px) minmax(150px, 800px) 1fr;
-}
-.header__logo {
-	width: 50px;
-	& img{
-		max-height: 100%;
-		max-width: 100%;
-	}
-	grid-column: 2 / 3;
-}
-.header__menu {
-	grid-column: 3 / 4;
-	display: grid;
-	grid-auto-flow: column;
-	justify-items: center;
-	grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
-
-
-}
-.body{
-	grid-area: body;
-	display: grid;
-	grid-template: 1fr 50px/ minmax(200px, 730px);
-	.content{
-		grid-row: 1 / 2;
-		background-color: #8be6fa;
-	}
-	.navbar{
-		position: fixed;
-		bottom: 0;
-		width: 100%;
-		height: 50px;
-		background-color: #d68bfa;
-		grid-row: 2 / 3;
-
-		.navbar__list {
-			font-size: 12px;
-			
-			display: grid;
-			grid-auto-flow: column;
-			.navbar__item{
-				text-align: center;
-				& img{
-					max-width: 25px;		
-					max-height: 25px;
-				}
-			
-			}
-		}
-	}
-}
-
-
-@media (min-width: 730px) {
-	.body {
-	grid-area: body;
-	gap: 10px;
-	grid-template: 1fr / 1fr 150px minmax(550px, 800px) 1fr;
-		.navbar {
-			position: relative;
-			z-index: -1;
-			height: 100%;
-			grid-column: 2 / 3;
-			grid-row: 1 / 2;
-
-			.navbar__list {
-				position: fixed;
-				font-size: 16px;
-				line-height: 27px;
-				grid-auto-flow: row;
-				justify-items: start;
-				gap: 10px;
-				.navbar__item{
-
-					& img{
-						display: inline;
-
-					}
-					.item__label{
-						display: inline;
-					}
-				}
-			}
-		}
-		.content {
-			grid-column: 3 / 4;
-			background-color: #8be6fa;
-		}
-	}
-
 	
 }
