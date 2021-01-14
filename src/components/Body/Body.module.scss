@@ -17,6 +17,7 @@
 		grid-row: 2 / 3;
 
 		.navbar__list {
+			margin: 0 0 0 0;
 			font-size: 12px;
 			
 			display: grid;
@@ -47,6 +48,7 @@
 			grid-row: 1 / 2;
 
 			.navbar__list {
+				margin: 20px 0 0 20px;
 				position: fixed;
 				font-size: 16px;
 				line-height: 27px;
@@ -73,4 +75,12 @@
 	}
 
 	
+}
+
+@media (min-width: 1600px) {
+	.body {
+		grid-area: body;
+		gap: 10px;
+		grid-template: 1fr / 1fr 150px minmax(550px, 1400px) 1fr;
+	}
 }
