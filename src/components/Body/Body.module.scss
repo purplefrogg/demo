@@ -7,31 +7,6 @@
 		color: #fff;
 		grid-row: 1 / 2;
 	}
-	.navbar{
-		position: fixed;
-		bottom: 0;
-		width: 100%;
-		height: 50px;
-		background-color: #424283;
-		color: #fff;
-		grid-row: 2 / 3;
-
-		.navbar__list {
-			margin: 0 0 0 0;
-			font-size: 12px;
-			
-			display: grid;
-			grid-auto-flow: column;
-			.navbar__item{
-				text-align: center;
-				& img{
-					max-width: 25px;		
-					max-height: 25px;
-				}
-			
-			}
-		}
-	}
 }
 
 
@@ -40,37 +15,9 @@
 	grid-area: body;
 	gap: 10px;
 	grid-template: 1fr / 1fr 150px minmax(550px, 800px) 1fr;
-		.navbar {
-			position: relative;
-			z-index: -1;
-			height: 100%;
-			grid-column: 2 / 3;
-			grid-row: 1 / 2;
-
-			.navbar__list {
-				margin: 20px 0 0 20px;
-				position: fixed;
-				font-size: 16px;
-				line-height: 27px;
-				grid-auto-flow: row;
-				justify-items: start;
-				gap: 10px;
-				.navbar__item{
-
-					& img{
-						display: inline;
-
-					}
-					.navbar__label{
-						display: inline;
-					}
-				}
-			}
-		}
 		.content {
 			grid-column: 3 / 4;
 			background-color: #181732;
-			
 		}
 	}
 

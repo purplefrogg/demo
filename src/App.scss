@@ -1,11 +1,8 @@
-body{
-	background-color: #181732;
-}
 .wrapper{
+	background-color: #181732;
 	min-height: 100vh;
 	display: grid;
 	grid-template: 50px 1fr/ 1fr;
-	
 	grid-template-areas:
 		"header"
 		"body";
