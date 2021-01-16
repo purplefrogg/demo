@@ -20,6 +20,7 @@
 					color: #fff;
 					&.active{
 						color: #000;
+						
 					}
 				}
 				& img{
@@ -33,16 +34,15 @@
 
 
 
-@media (min-width: 730px) {
+@media (min-width: 660px) {
 	
 		.navbar {
-			position: relative;
+			position: static;
 			height: 100%;
 			grid-column: 2 / 3;
 			grid-row: 1 / 2;
 			color: #fff;
 			.navbar__list {
-				margin: 20px 0 0 20px;
 				position: fixed;
 				font-size: 16px;
 				line-height: 27px;
@@ -50,14 +50,22 @@
 				justify-items: start;
 				gap: 10px;
 				.navbar__item{
-
+					text-align: left;
 					& img{
 						display: inline;
 
 					}
+					
 					.navbar__label{
-						color: #fff;
-						display: inline;
+						color: #181732;
+						width: 150px;
+						display: block;
+						&.active{
+							color: #fff;
+							
+							
+							background-color: #2d2d59;
+						}
 					}
 				}
 			}

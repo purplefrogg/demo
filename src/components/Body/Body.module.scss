@@ -2,7 +2,7 @@
 .body{
 	grid-area: body;
 	display: grid;
-	grid-template: 1fr 50px/ minmax(200px, 730px);
+	grid-template: 1fr 50px/ 1fr;
 	.content{
 		color: #fff;
 		grid-row: 1 / 2;
@@ -10,11 +10,10 @@
 }
 
 
-@media (min-width: 730px) {
+@media (min-width: 660px) {
 	.body {
 	grid-area: body;
-	gap: 10px;
-	grid-template: 1fr / 1fr 150px minmax(550px, 800px) 1fr;
+	grid-template: 1fr / 1fr 150px minmax(auto, 800px) 1fr;
 		.content {
 			grid-column: 3 / 4;
 			background-color: #181732;
@@ -28,7 +27,7 @@
 @media (min-width: 1600px) {
 	.body {
 		grid-area: body;
-		gap: 10px;
+		
 		grid-template: 1fr / 1fr 150px minmax(550px, 1400px) 1fr;
 	}
 }
