@@ -1,0 +1,9 @@
+
+.chat{
+    display: block;
+    color: #5555ce;
+    &.active{
+        color: #fff;
+        background-color: #181732;   
+    }
+}

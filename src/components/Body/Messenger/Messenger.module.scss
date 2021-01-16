@@ -1,0 +1,19 @@
+.chats{
+   
+    background-color: #2d2d59;
+    height: 100%;
+    
+}
+
+.messages{
+    background-color: #181732;   
+}
+
+.Messenger{
+    line-height: 25px;
+    font-size: 20px; 
+    display: grid;
+    grid-template: 1fr / 3.5fr 6.5fr;
+    height: 100%;
+}
+   

@@ -3,12 +3,12 @@ import './App.scss';
 import Body from './components/Body/Body';
 import Header from './components/Header/Header';
 
-const App = () => {
+const App = (props) => {
 	return (
 		<div className="App">
 			<div className="wrapper">
 				<Header />
-				<Body />
+				<Body state={props.state}/>
 			</div>
 
 		</div>
