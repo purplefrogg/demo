@@ -1,3 +1,5 @@
+import { rerender } from "../Render";
+
 
 let state = {
     messenger:{
@@ -40,9 +42,10 @@ let state = {
     }
 }
 
-let addMessage = (newMessage) => {
-    let data = {message:newMessage};
-    state.messenger.messages.push(data);
+let addMessage = (MessageText) => {
+    let newMessage = {message:MessageText};
+    state.messenger.messages.push(newMessage);
+    rerender(state);
 }
 export {addMessage};
 export default state;
