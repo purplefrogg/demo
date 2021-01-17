@@ -1,19 +1,47 @@
+
+
+.Messenger{
+    line-height: 20px;
+    font-size: 16px; 
+    display: grid;
+    grid-template: 1fr / minmax(150px, 3.5fr) 6.5fr;
+    height: 100%;
+}
+
 .chats{
    
     background-color: #2d2d59;
-    height: 100%;
+    height: inherit;
     
 }
-
 .messages{
-    background-color: #181732;   
-}
-
-.Messenger{
-    line-height: 25px;
-    font-size: 20px; 
-    display: grid;
-    grid-template: 1fr / 3.5fr 6.5fr;
-    height: 100%;
-}
    
+    background-color: #181732;
+    width: 100%;
+
+}
+.input{
+    grid-column: 1 / 3;
+    display: grid;
+    grid-template: 1fr / 9fr 1fr;
+    height: 40px;  
+    .inputArea{
+        display: block;
+        resize: none;
+        
+        line-height: 20px;
+        font-size: 16px; 
+        height: 40px;
+      
+        background-color: #5555ce;
+    }
+    .btnEnter{
+        display: block;
+        height: 40px;
+        color: #fff;
+        background-color: #2d2d59;
+        &:hover{
+            background-color: #5555ce;
+        }
+    }
+}

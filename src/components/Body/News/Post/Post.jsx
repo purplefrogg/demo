@@ -6,15 +6,15 @@ const Post = (props) => {
         <div className={style.post}>
             <div className={style.header}>
                 <div className={style.icon}>
-                    <img src="https://meragor.com/files/styles/ava_800_800_wm/ava-251.jpg" alt="" />
+                    <img src={props.icon} alt="" />
                 </div>
-                <div className={style.author}>anime</div>
+                <div className={style.author}>{props.author}</div>
             </div>
             <div className={style.image}>
               <img src={props.img} alt=''/>
             </div>
             <div className={style.text}>
-                {props.message}
+                {props.text}
             </div>
         </div>
     )

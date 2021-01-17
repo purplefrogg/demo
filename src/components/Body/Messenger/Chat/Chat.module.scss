@@ -1,7 +1,27 @@
 
 .chat{
     display: block;
+    overflow: hidden;
     color: #5555ce;
+    .header{
+        height: 50px;
+        .icon{
+            float: left;
+            line-height: 0;
+            margin: 0 15px 0 0;
+            & img{
+                
+                max-width: 50px;
+                border-radius: 50%;
+            }
+        }
+        .name{
+            font-size: 15px;
+            line-height: 17px;
+            padding: 10px 0 0 0;
+        }
+    }
+    
     &.active{
         color: #fff;
         background-color: #181732;   
