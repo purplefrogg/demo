@@ -28,9 +28,8 @@ let state = {
             {message:'I am DIO BRANDO'},
             {message:'who are you'},
             {message:'I am DIO BRANDO'},
-           
-        ]
-
+        ],
+        changeMessage :'',
     },
     news:{
         posts:[
@@ -42,10 +41,16 @@ let state = {
     }
 }
 
-let addMessage = (MessageText) => {
-    let newMessage = {message:MessageText};
-    state.messenger.messages.push(newMessage);
+let addMessage = () => {
+    let newMessage = {message:state.messenger.changeMessage};
+    state.messenger.messages.push(newMessage)
+    state.messenger.changeMessage = '';
     rerender(state);
 }
+let onChangeMessage = (newText) => {
+    state.messenger.changeMessage = newText;
+    rerender(state);
+}
+export {onChangeMessage};
 export {addMessage};
 export default state;

@@ -3,7 +3,6 @@ import Chat from './Chat/Chat';
 import Message from './Message/Message';
 import style from './Messenger.module.scss'
 
-
 const Messenger = (props) => {
 
 	let Chats = props.state.chats.map(chat =><Chat name={chat.name} id={chat.id} icon={chat.icon}/>)
@@ -13,9 +12,13 @@ const Messenger = (props) => {
 	let newMessage = React.createRef();
 
 	let addMessage = () => {
+		props.addMessage()
+		
+	}
+	let onChangeMessage = () => {
 		let text = newMessage.current.value;
-		props.addMessage(text)
-	
+		props.onChangeMessage(text);
+		
 	}
 	
 	return (
@@ -28,7 +31,8 @@ const Messenger = (props) => {
 				
 			</div>
 			<div className={style.input}>
-				<textarea className={style.inputArea} ref={newMessage}></textarea>
+				<textarea className={style.inputArea} ref={newMessage} value={props.state.changeMessage}
+				onChange={onChangeMessage}/>
 				<button onClick={addMessage} className={style.btnEnter}>enter</button>
 			</div>
 		</div>
