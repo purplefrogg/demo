@@ -1,10 +1,27 @@
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import state from './redux/state'
-import { rerender } from './Render';
+import store from './redux/state'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
 
 
-rerender(state);
+let rerender = (props) => {
+
+  ReactDOM.render(
+    <React.StrictMode>
+      <App state={store.getState()} addMessage={store.addMessage.bind(store)}
+      onChangeMessage={store.onChangeMessage.bind(store)} />
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+
+}
+
+rerender(store.getState());
+
+store.subscribe(rerender);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

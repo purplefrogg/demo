@@ -8,7 +8,7 @@ import News from './News/News'
 import Profile from './Profile/Profile';
 
 const Body = (props) => {
-
+	
     return (
 		// basename={process.env.PUBLIC_URL} <-- for github pages
 		<HashRouter>
@@ -16,8 +16,8 @@ const Body = (props) => {
 					<Navbar />
 					<div className={style.content}>
 						 <Route path='/Messenger' render={() => <Messenger state={props.state.messenger}
-						 addMessage={props.addMessage}
-						 onChangeMessage={props.onChangeMessage}/>}/>
+						 addMessage={props.addMessage} onChangeMessage={props.onChangeMessage}/>}
+						 />
 						 <Route path='/News' render={() => <News state={props.state.news}/>}/>
 						 <Route path='/Friends' render={() => {}}/>
 						 <Route path='/Profile' render={() => <Profile/>}/>
@@ -25,7 +25,8 @@ const Body = (props) => {
 				</div>
 		</HashRouter>
         
-    )
+	)
+	
 }
 
 export default Body;
