@@ -1,4 +1,7 @@
 
+const ON_CHANGE_MESSAGE = 'ON-CHANGE-MESSAGE'
+const ADD_MESSAGE = 'ADD-MESSAGE'
+
 let store = {
     state : {
         messenger:{
@@ -48,11 +51,15 @@ let store = {
             this.state.messenger.inputtingMessage = '';
             this.rerender();
         }
+       
         else if(action.type === 'ON-CHANGE-MESSAGE'){
             this.state.messenger.inputtingMessage = action.newText;
             this.rerender();
         }
     }
 }
+export const onChangeMessageActionCreator= (text) => 
+    ({type:ON_CHANGE_MESSAGE, newText:text})
+export const addMessageActionCreator = () => ({type:ADD_MESSAGE})
 
 export default store;

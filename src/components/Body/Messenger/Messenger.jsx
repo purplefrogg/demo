@@ -1,4 +1,5 @@
 import React from 'react';
+import { addMessageActionCreator, onChangeMessageActionCreator } from '../../../redux/state';
 import Chat from './Chat/Chat';
 import Message from './Message/Message';
 import style from './Messenger.module.scss'
@@ -12,16 +13,14 @@ const Messenger = (props) => {
 	let newMessage = React.createRef();
 
 	let addMessage = () => {
-		let action = {type:'ADD-MESSAGE'}
-		props.dispatch(action)
+		props.dispatch(addMessageActionCreator())
 		
 	}
 	
 	let onChangeMessage = () => {
 		let text = newMessage.current.value;
-		let action = {type:'ON-CHANGE-MESSAGE', newText: text }
-		props.dispatch(action);
-		
+		let action = onChangeMessageActionCreator(text)
+		props.dispatch(action)
 	}
 	
 	return (
