@@ -36,21 +36,22 @@ let store = {
     getState(){
         return this.state;
     },
-    sss:2,
-    addMessage (){
-        let state = this.state
-        let newMessage = {message:state.messenger.inputtingMessage};
-        this.state.messenger.messages.push(newMessage)
-        this.state.messenger.inputtingMessage = '';
-        this.rerender();
-    },
-    onChangeMessage (newText){
-        this.state.messenger.inputtingMessage = newText;
-     
-        this.rerender();
-    },
     subscribe (observer){
         this.rerender = observer;
+    },
+
+    dispatch(action){
+        if (action.type === 'ADD-MESSAGE'){
+            let state = this.state
+            let newMessage = {message:state.messenger.inputtingMessage};
+            this.state.messenger.messages.push(newMessage)
+            this.state.messenger.inputtingMessage = '';
+            this.rerender();
+        }
+        else if(action.type === 'ON-CHANGE-MESSAGE'){
+            this.state.messenger.inputtingMessage = action.newText;
+            this.rerender();
+        }
     }
 }
 

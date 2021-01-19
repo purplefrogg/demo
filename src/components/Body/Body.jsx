@@ -16,7 +16,7 @@ const Body = (props) => {
 					<Navbar />
 					<div className={style.content}>
 						 <Route path='/Messenger' render={() => <Messenger state={props.state.messenger}
-						 addMessage={props.addMessage} onChangeMessage={props.onChangeMessage}/>}
+						 dispatch={props.dispatch}/>}
 						 />
 						 <Route path='/News' render={() => <News state={props.state.news}/>}/>
 						 <Route path='/Friends' render={() => {}}/>

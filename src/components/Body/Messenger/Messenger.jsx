@@ -12,14 +12,15 @@ const Messenger = (props) => {
 	let newMessage = React.createRef();
 
 	let addMessage = () => {
-		props.addMessage()
+		let action = {type:'ADD-MESSAGE'}
+		props.dispatch(action)
 		
 	}
 	
 	let onChangeMessage = () => {
 		let text = newMessage.current.value;
-		
-		props.onChangeMessage(text);
+		let action = {type:'ON-CHANGE-MESSAGE', newText: text }
+		props.dispatch(action);
 		
 	}
 	
