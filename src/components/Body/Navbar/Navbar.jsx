@@ -16,7 +16,7 @@ const Navbar = () => {
 					<NavLink to='/Friends' activeClassName={style.active} className={style.navbar__label}>friends</NavLink>
 				</div>
 				<div className={style.navbar__item}>
-					<NavLink to='/Profile' activeClassName={style.active} className={style.navbar__label}>profile</NavLink>
+					<NavLink to='/id001' activeClassName={style.active} className={style.navbar__label}>profile</NavLink>
 				</div>
 			</div>
 		</div>

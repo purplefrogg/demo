@@ -20,7 +20,10 @@ const Body = (props) => {
 						 />
 						 <Route path='/News' render={() => <News state={props.state.news}/>}/>
 						 <Route path='/Friends' render={() => {}}/>
-						 <Route path='/Profile' render={() => <Profile/>}/>
+						 <Route path='/id001' render={() => <Profile state={props.state.profile.id001}/>}/>
+						 <Route path='/id002' render={() => <Profile state={props.state.profile.id002}/>}/>
+						 <Route path='/id003' render={() => <Profile state={props.state.profile.id003}/>}/>
+						 <Route path='/id004' render={() => <Profile state={props.state.profile.id004}/>}/>
 					</div>
 				</div>
 		</HashRouter>
