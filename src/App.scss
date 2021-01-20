@@ -1,9 +1,8 @@
 @import "nullstyle.scss";
 
-body{
-	overflow-y: scroll;
-}
 .wrapper{
+	overflow-wrap: break-word;
+    word-wrap: break-word;
 	background-color: #181732;
 	min-height: 100vh;
 	

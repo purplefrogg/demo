@@ -1,6 +1,7 @@
 
 .body{
 	width: 100%;
+	height: calc(100vh - 100px);
 	grid-area: body;
 	display: grid;
 	grid-template: 1fr 50px/ 1fr;
@@ -13,14 +14,15 @@
 
 @media (min-width: 660px) {
 	.body {
-	grid-area: body;
-	grid-template: 1fr / 1fr 150px minmax(auto, 800px) 1fr;
-		.content {
-			grid-column: 3 / 4;
-			background-color: #181732;
-			
+		height: calc(100vh - 50px);
+		grid-area: body;
+		grid-template: 1fr / 1fr 150px minmax(auto, 800px) 1fr;
+			.content {
+				grid-column: 3 / 4;
+				background-color: #181732;
+				
+			}
 		}
-	}
 
 	
 }

@@ -1,0 +1,30 @@
+.NewsPage{
+    overflow-y: scroll;
+    height: calc(100vh - 50px);
+}
+.addPost{
+    display: grid;
+    grid-template: 1fr / 9fr 1fr;
+    textarea{
+        display: inline-block;
+        resize: block;
+        line-height: 20px;
+        font-size: 16px; 
+
+        min-height: 50px;
+        height: 100px;
+        background-color: #5555ce;
+        &::placeholder{
+            opacity:30%;
+        }
+    }
+    .btnPost{
+        display: block;
+        height: 50px;
+        color: #fff;
+        background-color: #2d2d59;
+        &:hover{
+            background-color: #5555ce;
+        }
+    }
+}

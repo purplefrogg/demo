@@ -16,6 +16,7 @@ const Profile = (props) => {
 				<div className={style.status}> status: {props.state.status}</div>
 					
 			</div>
+			
 			<div className={style.myPosts}>
 				{PostItems}
 			</div>

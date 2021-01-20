@@ -5,19 +5,19 @@
     font-size: 16px; 
     display: grid;
     grid-template: 1fr / minmax(150px, 3.5fr) 6.5fr;
-    height: 100%;
 }
 
 .chats{
    
     background-color: #2d2d59;
-    height: inherit;
-    
+    height: calc(100vh - 140px);
+    overflow-y: scroll;
 }
 .messages{
-   
+    height: calc(100vh - 140px);
     background-color: #181732;
-    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
 }
 .input{
@@ -44,4 +44,13 @@
             background-color: #5555ce;
         }
     }
+}
+@media (min-width: 660px) {
+    .chats{
+        height: calc(100vh - 90px);
+    }
+    .messages{
+        height: calc(100vh - 90px);
+    }
+   
 }

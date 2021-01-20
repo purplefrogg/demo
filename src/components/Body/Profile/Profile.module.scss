@@ -1,4 +1,6 @@
 .ProfilePage{
+    overflow-y: scroll;
+    height: calc(100vh - 100px);
     display: grid;
     grid-template: 100px  1fr/ 100px 1fr;
 }  
@@ -16,8 +18,11 @@
     background-color: #2d2d59;
     border-radius: 10px;
 }
+
 @media (min-width: 660px) {
     .ProfilePage{
+        overflow-y: scroll;
+        height: calc(100vh - 50px);
         display: grid;
         grid-template: minmax(auto, 300px) 1fr/ minmax(auto, 300px) 1fr;
     }    
