@@ -97,7 +97,7 @@ let store = {
     dispatch(action) {
         this.state.news = newsReducer(this.state.news, action)
         this.state.messenger = messageReducer(this.state.messenger, action)
-        this.rerender();
+        this.rerender(this.state);
     }
 }
 
