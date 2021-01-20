@@ -1,14 +1,15 @@
 import React from 'react';
 import style from './News.module.scss'
 import Post from '../Post/Post'
-import {onChangeTextPostActionCreator, addPostActionCreator} from '../../../redux/state'
+import {onChangeTextPostActionCreator, addPostActionCreator} from '../../../redux/news-Reducer'
+
 
 
 const News = (props) => {
 
-	let newText = React.createRef();
-	let onChangeText = () =>{
-		let text = newText.current.value;
+	
+	let onChangeText = (e) =>{
+		let text = e.target.value;
 		let action = onChangeTextPostActionCreator(text)
 		props.dispatch(action)
 	}
@@ -20,7 +21,7 @@ const News = (props) => {
 	return (
 		<div className={style.NewsPage}>
 			<div className={style.addPost}>
-				<textarea ref={newText} onChange={onChangeText} value={props.state.inputtingPostText} placeholder="what's new"/>
+				<textarea  onChange={onChangeText} value={props.state.inputtingPostText} placeholder="what's new"/>
 				<button onClick={addPost} className={style.btnPost}>post</button>
 			</div>
 			{PostItems}
