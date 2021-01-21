@@ -5,14 +5,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import storeContext from './storeContext';
 
 
 let rerender = (state) => {
   ReactDOM.render(
-    <React.StrictMode>
-      <App state={state} store={store} />
-    </React.StrictMode>,
-    document.getElementById('root')
+    
+      <React.StrictMode>
+        <storeContext.Provider value={store}>
+        <App />
+        </storeContext.Provider>
+      </React.StrictMode>,
+  document.getElementById('root')
+  
   );
 
 }
@@ -20,6 +25,7 @@ let rerender = (state) => {
 rerender(store.getState());
 
 store.subscribe( () => {
+
   rerender(store.getState())
 })
 

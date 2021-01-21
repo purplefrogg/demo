@@ -8,15 +8,16 @@ import NewsConteiner from './News/NewsConteiner';
 import Profile from './Profile/Profile';
 
 const Body = (props) => {
+	
 	    return (
 		// basename={process.env.PUBLIC_URL} <-- for github pages
 		<HashRouter>
 		<div className={style.body}>
 					<Navbar />
 					<div className={style.content}>
-						 <Route path='/Messenger' render={() => <MessengerConteiner store={props.store}/>}
+						 <Route path='/Messenger' render={() => <MessengerConteiner/>}
 						 />
-						 <Route path='/News' render={() => <NewsConteiner store={props.store}/>}/>
+						 <Route path='/News' render={() => <NewsConteiner />}/>
 						 <Route path='/Friends' render={() => {}}/>
 						 <Route path='/id001' render={() => <Profile state={props.state.profile.id001}/>}/>
 						 <Route path='/id002' render={() => <Profile state={props.state.profile.id002}/>}/>

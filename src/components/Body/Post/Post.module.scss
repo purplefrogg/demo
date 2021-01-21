@@ -1,14 +1,13 @@
 .post{
+    display: grid;
     background-color: #2d2d59;
     margin: 0 0 10px 0;
     padding: 10px;
-   
-    .author{
-        padding: 15px 0 0 0;
-        line-height: 20px;
-        font-size: 15px;
-        font-weight: bold;
+
+    .text{
+       overflow: hidden;
     }
+   
     .image img{
         
         max-width: 100%;
@@ -17,7 +16,12 @@
 
 .header{
     height: 50px;
-  
+    .author{
+        padding: 15px 0 0 0;
+        line-height: 20px;
+        font-size: 15px;
+        font-weight: bold;
+    }
     .icon{
         float: left;
         line-height: 0;

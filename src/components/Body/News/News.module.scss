@@ -1,6 +1,8 @@
 .NewsPage{
+    
     overflow-y: scroll;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 100px);
+    
 }
 .addPost{
     display: grid;
@@ -26,5 +28,11 @@
         &:hover{
             background-color: #5555ce;
         }
+    }
+}
+
+@media (min-width: 660px){
+    .NewsPage{
+        height: calc(100vh - 50px);
     }
 }

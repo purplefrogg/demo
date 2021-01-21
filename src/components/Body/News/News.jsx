@@ -4,7 +4,6 @@ import Post from '../Post/Post'
 
 
 const News = (props) => {
-
 	let onChangeText = (e) =>{
 		let text = e.target.value
 		props.onChangeText(text)
@@ -12,7 +11,6 @@ const News = (props) => {
 	let addPost = () => {
 		props.addPost()
 	}
-	
 	let PostItems = props.state.posts.map(post =><Post idProfile={post.idProfile} icon={post.icon} author={post.author} text={post.text} img={post.img} />)
 	return (
 		<div className={style.NewsPage}>

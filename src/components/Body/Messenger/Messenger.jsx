@@ -4,7 +4,7 @@ import Message from './Message/Message';
 import style from './Messenger.module.scss'
 
 const Messenger = (props) => {
-	debugger
+	
 	let Chats = props.state.chats.map(chat =><Chat name={chat.name} id={chat.id} icon={chat.icon}/>)
 	let Messages = props.state.messages.map(mess =><Message message={mess.message}/>)
 	
