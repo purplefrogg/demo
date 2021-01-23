@@ -1,0 +1,13 @@
+.UsersPage{ 
+    overflow-y: scroll;
+    height: calc(100vh - 100px);
+}
+
+
+@media (min-width: 660px) {
+    .UsersPage{ 
+       
+        height: calc(100vh - 50px);
+    }
+    
+}

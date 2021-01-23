@@ -13,18 +13,23 @@ let initialState = {
 const newsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ON_CHANGE_TEXTPOST:
-            state.inputtingPostText = action.newText;
-            return state;
+            return {
+                ...state,
+                inputtingPostText: action.newText
+            }
         case ADD_POST:
-            let newPost = {
-                icon: 'https://sun9-34.userapi.com/impf/c845420/v845420775/bafaa/hP5ZTk4e-O0.jpg?size=200x200&quality=96&proxy=1&sign=c915e9a943591bf8db59656c689429e4&type=album',
-                text: state.inputtingPostText,
-                idProfile: '/id001', author: 'Trish Una',
-            };
-            state.posts.push(newPost)
-            state.inputtingPostText = '';
-            return state;
-        default: 
+            return {
+                ...state,
+                inputtingPostText: '',
+                posts: [
+                    {   icon: 'https://sun9-34.userapi.com/impf/c845420/v845420775/bafaa/hP5ZTk4e-O0.jpg?size=200x200&quality=96&proxy=1&sign=c915e9a943591bf8db59656c689429e4&type=album',
+                        text: state.inputtingPostText,
+                        idProfile: '/id001', author: 'Trish Una',
+                    },
+                    ...state.posts,
+                ]
+            }
+        default:
             return state;
     }
     

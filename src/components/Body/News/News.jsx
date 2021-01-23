@@ -4,6 +4,7 @@ import Post from '../Post/Post'
 
 
 const News = (props) => {
+	
 	let onChangeText = (e) =>{
 		let text = e.target.value
 		props.onChangeText(text)
