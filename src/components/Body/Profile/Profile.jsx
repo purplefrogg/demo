@@ -1,5 +1,5 @@
 import React from 'react';
-import Post from '../Post/Post';
+import Post from '../../common/Post';
 import style from './Profile.module.scss'
 
 

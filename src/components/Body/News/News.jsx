@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './News.module.scss'
-import Post from '../Post/Post'
+import Post from '../../common/Post/Post'
 
 
 const News = (props) => {
