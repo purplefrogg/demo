@@ -5,6 +5,7 @@ import style from './Body.module.scss'
 import MessengerConteiner from './Messenger/MessengerConteiner';
 import Navbar from './Navbar/Navbar';
 import NewsConteiner from './News/NewsConteiner';
+import ProfileConteiner from './Profile/ProfileConteiner';
 import UsersConteiner from './Users/UsersConteiner';
 
 const Body = (props) => {
@@ -16,6 +17,7 @@ const Body = (props) => {
 					<Route path='/Messenger' render={() => <MessengerConteiner />} />
 					<Route path='/Users' render={() => <UsersConteiner />}/>
 					<Route path='/News' render={() => <NewsConteiner />} />
+					<Route path='/Profile' render={() => <ProfileConteiner />} />
 					<Route path='/Friends' render={() => { }} />
 				</div>
 			</div>

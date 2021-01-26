@@ -1,24 +1,27 @@
 import React from 'react';
-import Post from '../../common/Post';
 import style from './Profile.module.scss'
 
 
 const Profile = (props) => {
-	let PostItems = props.state.posts.map(post =>
-	<Post idProfile={post.idProfile} icon={post.icon} author={post.author} text={post.text} img={post.img} />)
+	
 	return (
 		<div className={style.ProfilePage}>
 			<div className={style.avatar}>
-				<img src={props.state.avatar} alt="" />
+				<img src={props.profile.photos.large} alt="" />
 			</div>
 			<div className={style.Info}>
-				<div className={style.name}>{props.state.name}</div>
-				<div className={style.status}> status: {props.state.status}</div>
+				<div className={style.Info__item}>{props.profile.fullName}</div>
+				<div className={style.Info__item}> status: {props.profile.aboutMe}</div>
+				<div className={style.Info__item}> facebook: {props.profile.contacts.facebook}</div>
+				<div className={style.Info__item}> vk: {props.profile.contacts.vk}</div>
+				<div className={style.Info__item}> twitter: {props.profile.contacts.twitter}</div>
+				<div className={style.Info__item}> instagram: {props.profile.contacts.instagram}</div>
+				<div className={style.Info__item}> github: {props.profile.contacts.github}</div>
+				<div className={style.Info__item}> mainLink: {props.profile.contacts.mainLink}</div>
 					
 			</div>
 			
 			<div className={style.myPosts}>
-				{PostItems}
 			</div>
 		</div>
 	)

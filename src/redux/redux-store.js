@@ -7,12 +7,11 @@ import usersReducer from "./users-Reducer";
 let reducers = combineReducers({
     news: newsReducer,
     messenger: messageReducer,
-    profile: profileReducer,
+    profilePage: profileReducer,
     usersPage: usersReducer,
 })
 
 let store = createStore(reducers);
 
-window.store = store;
 
 export default store

@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import style from './Users.module.scss'
 
 const Users = (props) => {
@@ -14,8 +15,9 @@ const Users = (props) => {
 					props.users.map(user => <div key={user.id}>
 						{user.name}
 						{user.status}
-						<img src={user.photos.small != null ? user.photos.small : 'https://sun9-34.userapi.com/impf/c845420/v845420775/bafaa/hP5ZTk4e-O0.jpg?size=200x200&quality=96&proxy=1&sign=c915e9a943591bf8db59656c689429e4&type=album'}
-							alt="" />
+						<NavLink to={`/Profile/${user.id}`}><img src={user.photos.small != null ? user.photos.small : 'https://sun9-34.userapi.com/impf/c845420/v845420775/bafaa/hP5ZTk4e-O0.jpg?size=200x200&quality=96&proxy=1&sign=c915e9a943591bf8db59656c689429e4&type=album'}
+							alt="" /></NavLink>
+						
 						{user.followed ? <button onClick={() => { props.unfollow(user.id) }}>unfollow</button>
 							: <button onClick={() => { props.follow(user.id) }}>follow</button>}
 					</div>
