@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { followApi } from '../../../api/api';
 import style from './Users.module.scss'
 
 const Users = (props) => {
@@ -22,38 +22,26 @@ const Users = (props) => {
 						<div className={style.name}>{user.name}</div>
 						<div className={style.status}>{user.status}</div>
 					</div>
-
-					{user.followed ? <button onClick={() => {
-						axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
-							withCredentials: true,
-							headers: {
-								"API-KEY": "dd920698-43c2-4a1d-aa58-8b7dafae5603"
-							}
-						})
+					{user.followed ? <button disabled={props.isFollowing.some(id => id === user.id)} onClick={() => {
+						
+						props.toggleIsFollowing(true, user.id)
+						followApi.followDelete(user.id)
 							.then((response) => {
 								if (response.data.resultCode === 0) {
 									props.unfollow(user.id)
 								}
+								props.toggleIsFollowing(false, user.id)
 							})
-
-
 					}}>unfollow</button>
-						: <button onClick={() => {
-							axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
-								withCredentials: true,
-								headers: {
-									"API-KEY": "dd920698-43c2-4a1d-aa58-8b7dafae5603"
-								}
-
-							})
+						: <button disabled={props.isFollowing.some(id => id === user.id)} onClick={() => {
+							props.toggleIsFollowing(true, user.id)
+							followApi.followPost(user.id)
 								.then((response) => {
 									if (response.data.resultCode === 0) {
 										props.follow(user.id)
 									}
+									props.toggleIsFollowing(false, user.id)
 								})
-
-
-
 						}}>follow</button>}
 				</div>
 				)}
