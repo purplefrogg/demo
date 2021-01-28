@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { followApi } from '../../../api/api';
 import style from './Users.module.scss'
 
 const Users = (props) => {
@@ -22,27 +21,12 @@ const Users = (props) => {
 						<div className={style.name}>{user.name}</div>
 						<div className={style.status}>{user.status}</div>
 					</div>
-					{user.followed ? <button disabled={props.isFollowing.some(id => id === user.id)} onClick={() => {
-						
-						props.toggleIsFollowing(true, user.id)
-						followApi.followDelete(user.id)
-							.then((response) => {
-								if (response.data.resultCode === 0) {
-									props.unfollow(user.id)
-								}
-								props.toggleIsFollowing(false, user.id)
-							})
-					}}>unfollow</button>
-						: <button disabled={props.isFollowing.some(id => id === user.id)} onClick={() => {
-							props.toggleIsFollowing(true, user.id)
-							followApi.followPost(user.id)
-								.then((response) => {
-									if (response.data.resultCode === 0) {
-										props.follow(user.id)
-									}
-									props.toggleIsFollowing(false, user.id)
-								})
-						}}>follow</button>}
+					{user.followed ? <button disabled={props.isFollowing.some(id => id === user.id)}
+					 onClick={() => {props.unfollow(user.id)}}>
+						 unfollow</button>
+						: <button disabled={props.isFollowing.some(id => id === user.id)} 
+						onClick={() => {props.follow(user.id)}}>
+							follow</button>}
 				</div>
 				)}
 		</div>

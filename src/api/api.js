@@ -12,18 +12,15 @@ export const usersApi = ({
     getUsers(page, count) {
         return instance.get(`users?page=${page}&count=${count}`)
     },
-
-})
-
-export const followApi = ({
-    followDelete(id){
-       return instance.delete(`follow/${id}`)
+    followDelete(id) {
+        return instance.delete(`follow/${id}`)
     },
-    followPost(id){
+    followPost(id) {
         return instance.post(`follow/${id}`)
-     }
-   
+    }
 })
+
+
 
 export const profileApi = ({
     getProfile(userId) {
@@ -32,7 +29,7 @@ export const profileApi = ({
 
 })
 export const authApi = ({
-    getAuthData() {
+    me() {
         return instance.get(`auth/me`)
     },
 
