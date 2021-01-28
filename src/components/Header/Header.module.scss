@@ -26,17 +26,25 @@
 	display: grid;
 	grid-auto-flow: column;
 	grid-template-columns: repeat(2, 1fr);
-
-	.users{
-		color: #fff;
+	:last-child{
+		justify-self: end;
+		
+	}
+	.header__item{
+		margin: 0 5px 0 0;
 		padding: 10px;
 		border-radius: 10px;
 		background-color: #181732;
 		font-size: 15px;
-		
-		&.active{
-			color: rgb(97, 39, 39);
+		width: fit-content;
+		color: #fff;
+		.link{
+			color: #fff;
+			&.active{
+				color: rgb(133, 0, 0);
+			}
 		}
+		
 	}
 
 }

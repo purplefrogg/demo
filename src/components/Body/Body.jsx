@@ -17,7 +17,7 @@ const Body = (props) => {
 					<Route path='/Messenger' render={() => <MessengerConteiner />} />
 					<Route path='/Users' render={() => <UsersConteiner />}/>
 					<Route path='/News' render={() => <NewsConteiner />} />
-					<Route path='/Profile' render={() => <ProfileConteiner />} />
+					<Route path='/Profile/:userId?' render={() => <ProfileConteiner />} />
 					<Route path='/Friends' render={() => { }} />
 				</div>
 			</div>

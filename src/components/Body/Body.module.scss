@@ -1,6 +1,6 @@
 
 .body{
-	width: 100%;
+
 	height: calc(100vh - 100px);
 	grid-area: body;
 	display: grid;
@@ -8,6 +8,7 @@
 	.content{
 		color: #fff;
 		grid-row: 1 / 2;
+
 	}
 }
 

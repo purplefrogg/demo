@@ -2,7 +2,21 @@
     overflow-y: scroll;
     height: calc(100vh - 100px);
 }
-
+.User{
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    .avatar{
+        width: 100%;
+        border-radius: 50%;
+        img{
+            width: 100%;
+        }
+    }
+    .info{
+        display: inline;
+        overflow: hidden;
+    }
+}
 .selectedPage{
     font-weight: bold;
     font-size: 18px;
@@ -10,7 +24,6 @@
 
 @media (min-width: 660px) {
     .UsersPage{ 
-       
         height: calc(100vh - 50px);
     }
     

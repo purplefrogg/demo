@@ -10,20 +10,22 @@ class UsersConteiner extends React.Component {
 	componentDidMount() {
 		this.props.toggleIsFetching(true)
 		axios.get(`https://social-network.samuraijs.com/api/1.0/users?
-		page=${this.props.page}&count=${this.props.count}`)
+		page=${this.props.page}&count=${this.props.count}`, {
+			withCredentials: true,
+		})
 			.then((response) => {
 				this.props.setUsers(response.data.items)
 				this.props.setTotalCount(response.data.totalCount)
 				this.props.toggleIsFetching(false)
-			}).catch(error =>{
-				console.log('error')
 			})
 	}
 	onPageChanged =(pageNumber) =>{
 		this.props.toggleIsFetching(true)
 		this.props.setCurentPage(pageNumber)
 		axios.get(`https://social-network.samuraijs.com/api/1.0/users?
-		page=${pageNumber}&count=${this.props.count}`)
+		page=${pageNumber}&count=${this.props.count}`, {
+			withCredentials: true,
+		})
 			.then((response) => {
 				
 				this.props.setUsers(response.data.items)
