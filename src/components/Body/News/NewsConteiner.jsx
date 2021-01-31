@@ -2,10 +2,12 @@
 import { onChangeTextPostActionCreator, addPostActionCreator } from '../../../redux/news-Reducer'
 import { connect } from 'react-redux';
 import News from './News';
+import withAuthRedirect from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 let mapStateToProps = (state) => {
 	return {
-		state: state.news
+		state: state.news,
 	}
 }
 let mapDispatchToProps = (dispatch) => {
@@ -18,8 +20,7 @@ let mapDispatchToProps = (dispatch) => {
 		}
 	}
 }
-
-let NewsConteiner = connect(mapStateToProps, mapDispatchToProps)(News)
-
-
-export default NewsConteiner;
+export default compose(
+	connect(mapStateToProps, mapDispatchToProps),
+	withAuthRedirect
+)(News);

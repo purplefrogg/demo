@@ -1,12 +1,14 @@
 
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { addMessageActionCreator, onChangeMessageActionCreator } from '../../../redux/message-Reduser';
+import withAuthRedirect from '../../hoc/withAuthRedirect';
 import Messenger from './Messenger';
 
 
 let mapStateToProps = (state) => {
 	return {
-		state: state.messenger
+		state: state.messenger,
 	}
 }
 let mapDispatchToProps = (dispatch) => {
@@ -19,6 +21,8 @@ let mapDispatchToProps = (dispatch) => {
 		}
 	}
 }
-let MessengerConteiner = connect(mapStateToProps, mapDispatchToProps)(Messenger)
 
-export default MessengerConteiner;
+export default compose(
+	connect(mapStateToProps, mapDispatchToProps),
+	withAuthRedirect
+)(Messenger);

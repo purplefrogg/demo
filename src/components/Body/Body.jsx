@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import Login from '../Login/Login';
 import style from './Body.module.scss'
 
 import MessengerConteiner from './Messenger/MessengerConteiner';
@@ -17,6 +18,7 @@ const Body = (props) => {
 					<Route path='/Messenger' render={() => <MessengerConteiner />} />
 					<Route path='/Users' render={() => <UsersConteiner />}/>
 					<Route path='/News' render={() => <NewsConteiner />} />
+					<Route path='/Login' render={() => <Login />} />
 					<Route path='/Profile/:userId?' render={() => <ProfileConteiner />} />
 					<Route path='/Friends' render={() => { }} />
 				</div>
