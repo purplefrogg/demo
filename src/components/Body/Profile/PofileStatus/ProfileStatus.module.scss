@@ -1,0 +1,43 @@
+.ProfilePage{
+    overflow-y: scroll;
+    max-width: 100%;
+    height: calc(100vh - 100px);
+    display: grid;
+    grid-template: 1fr 4fr/ minmax(150px, 3.5fr) 6.5fr;
+   
+}  
+.avatar{
+    margin:  0 0  0 10px;
+    width: 100%;
+    img{
+        width: 100%;
+        border-radius: 50%;
+    }
+}
+.Info{
+    overflow-x: hidden;
+    padding: 5px 0 0 5px;
+    margin: 10px 10px 10px 20px;
+    background-color: #2d2d59;
+    border-radius: 10px;
+    .Info__item{
+        max-width: 100%;
+        
+        margin: 0 0 5px 0;
+    }
+}
+
+@media (min-width: 660px) {
+    .ProfilePage{
+        max-width: 100%;
+        overflow-y: scroll;
+        height: calc(100vh - 50px);
+        display: grid;
+        grid-template: minmax(auto, 300px) 1fr/ minmax(auto, 300px) 1fr;
+    }    
+
+}
+
+.myPosts{
+    grid-column: 2 span;
+}
