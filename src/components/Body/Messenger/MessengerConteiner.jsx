@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { addMessageActionCreator, onChangeMessageActionCreator } from '../../../redux/message-Reduser';
+import { addMessage } from '../../../redux/message-Reduser';
 import withAuthRedirect from '../../hoc/withAuthRedirect';
 import Messenger from './Messenger';
 
@@ -11,16 +11,10 @@ let mapStateToProps = (state) => {
 		state: state.messenger,
 	}
 }
-let mapDispatchToProps = (dispatch) => {
-	return {
-		addMessage: () => {
-			dispatch(addMessageActionCreator());
-		},
-		onChangeMessage: (text) => {
-			dispatch(onChangeMessageActionCreator(text));
-		}
-	}
+let mapDispatchToProps = {
+	addMessage,
 }
+
 
 export default compose(
 	connect(mapStateToProps, mapDispatchToProps),

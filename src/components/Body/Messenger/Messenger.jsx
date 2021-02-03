@@ -1,25 +1,31 @@
 import React from 'react';
+import { Field, reduxForm } from 'redux-form'
 import Chat from './Chat/Chat';
 import Message from './Message/Message';
 import style from './Messenger.module.scss'
+
+const MessageForm = (props) => {
+    return (
+           <form onSubmit={props.handleSubmit}  className={style.input}>
+				<Field name={'message'}  component={"input"} className={style.inputArea} />
+				<button className={style.btnEnter}>enter</button>
+			</form>
+    )
+}
+const MessageReduxForm = reduxForm({
+    // a unique name for the form
+    form: 'message'
+  })(MessageForm)
 
 const Messenger = (props) => {
 	
 	let Chats = props.state.chats.map(chat =><Chat name={chat.name} id={chat.id} icon={chat.icon}/>)
 	let Messages = props.state.messages.map(mess =><Message message={mess.message}/>)
 	
-
-	let newMessage = React.createRef();
-
-	let addMessage = () => {
-		props.addMessage()	
-	}
-	
-	let onChangeMessage = () => {
-		let text = newMessage.current.value;
-		props.onChangeMessage(text)
-	}
-	
+	const onSubmit = (formData) =>{
+		props.addMessage(formData.message)
+		formData.message = ''	
+    }
 	return (
 		<div className={style.Messenger}>
 			<div className={style.chats}>
@@ -29,12 +35,7 @@ const Messenger = (props) => {
 				{Messages}
 				
 			</div>
-			<div className={style.input}>
-				<textarea className={style.inputArea} ref={newMessage}
-				  value={props.state.inputtingMessage} onChange={onChangeMessage}
-				/>
-				<button onClick={addMessage} className={style.btnEnter}>enter</button>
-			</div>
+			<MessageReduxForm onSubmit={onSubmit}/>
 		</div>
 	)
 }

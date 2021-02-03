@@ -23,7 +23,7 @@ const newsReducer = (state = initialState, action) => {
                 inputtingPostText: '',
                 posts: [
                     {   icon: 'https://sun9-34.userapi.com/impf/c845420/v845420775/bafaa/hP5ZTk4e-O0.jpg?size=200x200&quality=96&proxy=1&sign=c915e9a943591bf8db59656c689429e4&type=album',
-                        text: state.inputtingPostText,
+                        text: action.text,
                         idProfile: '/id001', author: 'Trish Una',
                     },
                     ...state.posts,
@@ -34,8 +34,7 @@ const newsReducer = (state = initialState, action) => {
     }
     
 }
-export const onChangeTextPostActionCreator = (text) => 
-    ({type:ON_CHANGE_TEXTPOST, newText:text})
-export const addPostActionCreator = () => ({type:ADD_POST})
+
+export const addPost = (text) => ({type:ADD_POST, text})
 
 export default newsReducer

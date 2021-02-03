@@ -1,4 +1,4 @@
-const ON_CHANGE_MESSAGE = 'ON-CHANGE-MESSAGE'
+
 const ADD_MESSAGE = 'ADD-MESSAGE'
 
 let initialState = {
@@ -37,23 +37,16 @@ const messageReducer = (state = initialState, action) => {
             return{
             ...state,
             messages: [
-                ...state.messages, {message: state.inputtingMessage},
+                ...state.messages, {message: action.message},
             ],
             inputtingMessage: '',
-            }
-        case ON_CHANGE_MESSAGE:
-            return{
-            ...state,
-            inputtingMessage: action.newText,
             }
         default:
             return state;
     }
 
 }
-export const onChangeMessageActionCreator = (text) =>
-    ({ type: ON_CHANGE_MESSAGE, newText: text })
 
-export const addMessageActionCreator = () => ({ type: ADD_MESSAGE })
+export const addMessage = (message) => ({ type: ADD_MESSAGE, message})
 
 export default messageReducer
