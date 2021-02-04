@@ -28,7 +28,6 @@ let initialState = {
         { message: 'who are you' },
         { message: 'I am DIO BRANDO' },
     ],
-    inputtingMessage: '',
 }
 
 const messageReducer = (state = initialState, action) => {

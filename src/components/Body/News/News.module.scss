@@ -7,19 +7,21 @@
 .addPost{
     display: grid;
     grid-template: 1fr / 9fr 1fr;
-    textarea{
+    .Textarea{
+       
         display: inline-block;
         resize: block;
         line-height: 20px;
         font-size: 16px; 
-
+    
         min-height: 50px;
         height: 100px;
         background-color: #5555ce;
         &::placeholder{
-            opacity:30%;
+            opacity:50%;
         }
     }
+   
     .btnPost{
         display: block;
         height: 50px;
