@@ -40,11 +40,14 @@ export const authApi = ({
     me() {
         return instance.get(`auth/me`)
     },
-    login(email, password, rememberMe){
+    login(email, password, rememberMe = false){
         return instance.post(`auth/login`, {
-            email: email,
-            password: password, 
-            rememberMe: rememberMe
+            email,
+            password, 
+            rememberMe
         })
+    },
+    logout(){
+        return instance.delete(`auth/login`)
     }
 })
