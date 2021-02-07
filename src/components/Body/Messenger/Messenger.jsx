@@ -1,14 +1,12 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form'
-import { maxLengthCreator, required } from '../../../utils/validators/validators';
+
 import { inputElement } from '../../common/FormsControls/FormsControls';
 import Chat from './Chat/Chat';
 import Message from './Message/Message';
 import style from './Messenger.module.scss'
 
 
-
-const maxLength1000 = maxLengthCreator(1000)
 const input = inputElement("input")
 
 const MessageForm = (props) => {
@@ -16,7 +14,7 @@ const MessageForm = (props) => {
     return (
            <form onSubmit={props.handleSubmit}  className={style.input}>
 				<Field name={'message'}  component={input}
-				validate={[required, maxLength1000]} className={style.inputArea} />
+				className={style.inputArea} />
 				<button className={style.btnEnter}>enter</button>
 			</form>
     )

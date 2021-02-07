@@ -1,3 +1,18 @@
+@import "nullstyle.scss";
+
+.wrapper{
+	overflow-wrap: break-word;
+    word-wrap: break-word;
+	background-color: #181732;
+	min-height: 100vh;
+	
+	display: grid;
+	grid-template: 50px 1fr/ 1fr;
+	grid-template-areas:
+		"header"
+		"body";
+	
+}
 
 .body{
 

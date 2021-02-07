@@ -9,6 +9,7 @@ export const inputElement = InputType => ({ input, meta, ...props }) => {
     return (
         <div  className={style.inputForm}>
             <InputType  {...input} {...props} className={props.className + ' ' + (hasError ? style.error : '') }/>
+            { hasError && <span>{meta.error}</span> }
         </div>
     )
 }

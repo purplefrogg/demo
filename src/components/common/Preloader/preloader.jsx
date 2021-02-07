@@ -1,4 +1,4 @@
-import style from './preloader.module.css'
+import style from './preloader.module.scss'
 
 
 const Preloader = () => {
