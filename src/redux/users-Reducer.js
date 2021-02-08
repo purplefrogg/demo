@@ -74,7 +74,7 @@ export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isF
 export const toggleIsFollowing = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING, isFetching, id: userId })
 
 
-export const getUsers = (page, count) => {
+export const requestUsers = (page, count) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true))
         usersApi.getUsers(page, count)
