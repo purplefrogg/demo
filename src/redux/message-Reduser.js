@@ -1,4 +1,4 @@
-
+const DELETE_MESSAGE = 'DELETE_MESSAGE'
 const ADD_MESSAGE = 'ADD-MESSAGE'
 
 let initialState = {
@@ -23,22 +23,29 @@ let initialState = {
         { id: 18, name: 'Tony Tony Chopper', icon: 'https://i.pinimg.com/originals/32/00/3a/32003a6ec5a9c9ca0c4b55ec3627bd7a.jpg' },
     ],
     messages: [
-        { message: 'who are you' },
-        { message: 'I am DIO BRANDO' },
-        { message: 'who are you' },
-        { message: 'I am DIO BRANDO' },
+        { id: 1, message: 'who are you' },
+        { id: 2, message: 'I am DIO BRANDO' },
+        { id: 3, message: 'who are you' },
+        { id: 4, message: 'I am DIO BRANDO' },
     ],
 }
 
 const messageReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:
-            return{
-            ...state,
-            messages: [
-                ...state.messages, {message: action.message},
-            ],
-            inputtingMessage: '',
+            return {
+                ...state,
+                messages: [
+                    ...state.messages, { message: action.message },
+                ],
+                inputtingMessage: '',
+            }
+        case DELETE_MESSAGE:
+            return {
+                ...state,
+                messages: state.messages.filter(m => m.id != action.userId),
+                
+                inputtingMessage: '',
             }
         default:
             return state;
@@ -46,6 +53,8 @@ const messageReducer = (state = initialState, action) => {
 
 }
 
-export const addMessage = (message) => ({ type: ADD_MESSAGE, message})
+export const addMessage = (message) => ({ type: ADD_MESSAGE, message })
+
+export const deleteMessage = (userId) => ({ type: DELETE_MESSAGE, userId })
 
 export default messageReducer

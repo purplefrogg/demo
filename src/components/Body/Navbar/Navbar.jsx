@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import style from './Navbar.module.scss'
 
-const Navbar = () => {
+const Navbar = React.memo(() => {
 	return (
 		<div className={style.navbar}>
 			<div className={style.navbar__list}>
@@ -22,5 +22,5 @@ const Navbar = () => {
 		</div>
 	)
 }
-
+)
 export default Navbar;
