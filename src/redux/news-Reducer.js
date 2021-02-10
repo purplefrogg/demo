@@ -1,5 +1,5 @@
-const ADD_POST = 'ADD-POST'
-const ON_CHANGE_TEXTPOST = 'ON-CHANGE-TEXTPOST'
+const ADD_POST = 'news/ADD-POST'
+const ON_CHANGE_TEXTPOST = 'news/ON-CHANGE-TEXTPOST'
 
 let initialState = {
     posts: [

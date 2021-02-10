@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import User from './User';
 import style from './Users.module.scss'
 
 const Users = (props) => {
@@ -11,27 +11,13 @@ const Users = (props) => {
 	return (
 		<div className={style.UsersPage}>
 			{pages.map(p => <span onClick={() => { props.onPageChanged(p) }} className={p === props.page && style.selectedPage}>{p} </span>)}
-			{
-				props.users.map(user => <div className={style.User} key={user.id}>
-
-					<NavLink className={style.avatar} to={`/Profile/${user.id}`}>
-						<img src={user.photos.small != null ? user.photos.small : 'https://sun9-34.userapi.com/impf/c845420/v845420775/bafaa/hP5ZTk4e-O0.jpg?size=200x200&quality=96&proxy=1&sign=c915e9a943591bf8db59656c689429e4&type=album'}
-							alt="" /></NavLink>
-					<div className={style.info}>
-						<div className={style.name}>{user.name}</div>
-						<div className={style.status}>{user.status}</div>
-					</div>
-					{user.followed ? <button disabled={props.isFollowing.some(id => id === user.id)}
-					 onClick={() => {props.unfollow(user.id)}}>
-						 unfollow</button>
-						: <button disabled={props.isFollowing.some(id => id === user.id)} 
-						onClick={() => {props.follow(user.id)}}>
-							follow</button>}
-				</div>
-				)}
+			{props.users.map(user => <User user={user}
+			isFollowing={props.isFollowing}
+			follow={props.follow}
+			unfollow={props.unfollow}
+			/>)}
 		</div>
 	)
-}
-
+	}
 
 export default Users;
