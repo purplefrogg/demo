@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { HashRouter, Route, withRouter } from 'react-router-dom';
 import { initializeApp } from './redux/app-Reducer'
 import MessengerConteiner from './components/Body/Messenger/MessengerConteiner';
 import NewsConteiner from './components/Body/News/NewsConteiner';
@@ -10,8 +10,9 @@ import Login from './components/Login/Login';
 import style from './App.module.scss'
 import Navbar from './components/Body/Navbar/Navbar';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import Preloader from './components/common/Preloader/preloader';
+import store from './redux/redux-store'
 
 class App extends React.Component {
 	componentDidMount(){
@@ -50,7 +51,17 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default compose(
+let AppContainer = compose(
 	withRouter,
 	connect(mapStateToProps, { initializeApp }),
 )(App)
+
+const MainApp = (props) =>{
+	return(
+	<HashRouter>
+    <Provider store={store}>
+	<AppContainer />
+	</Provider>
+    </HashRouter>
+	)}
+export default MainApp

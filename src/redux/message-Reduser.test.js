@@ -1,4 +1,3 @@
-import { render, screen } from '@testing-library/react';
 
 import messageReducer, { addMessage, deleteMessage } from './message-Reduser';
 
