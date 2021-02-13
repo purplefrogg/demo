@@ -4,18 +4,18 @@ import { updateObjectInArray } from "../utils/object-Helpers"
 const FOLLOW = 'users/FOLLOW'
 const UNFOLLOW = 'users/UNFOLLOW'
 const SET_USERS = 'users/SET-USERS'
-const SET_CURENT_PAGE = 'users/SET_CURENT_PAGE'
+const SET_CURRENT_PAGE = 'users/SET_CURRENT_PAGE'
 const SET_TOTAL_COUNT = 'users/SET_TOTAL_COUNT'
 const TOGGLE_IS_FETCHING = 'users/TOGGLE_IS_FETCHING'
 const TOGGLE_IS_FOLLOWING = 'users/TOGGLE_IS_FOLLOWING'
 
 let initialState = {
     users: [],
-    totalCount: 6,
+    totalCount: 0,
     count: 100,
     page: 1,
     isFetching: true,
-    isFollowing: [2, 3]
+    isFollowing: []
 }
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -34,7 +34,7 @@ const usersReducer = (state = initialState, action) => {
         case SET_USERS: {
             return { ...state, users: action.users }
         }
-        case SET_CURENT_PAGE: {
+        case SET_CURRENT_PAGE: {
             return { ...state, page: action.page }
         }
         case SET_TOTAL_COUNT: {
@@ -59,7 +59,7 @@ const usersReducer = (state = initialState, action) => {
 export const followSuccess = (userId) => ({ type: FOLLOW, id: userId })
 export const unfollowSuccess = (userId) => ({ type: UNFOLLOW, id: userId })
 export const setUsers = (users) => ({ type: SET_USERS, users })
-export const setCurentPage = (page) => ({ type: SET_CURENT_PAGE, page })
+export const setCurrentPage = (page) => ({ type: SET_CURRENT_PAGE, page })
 export const setTotalCount = (totalCount) => ({ type: SET_TOTAL_COUNT, totalCount })
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
 export const toggleIsFollowing = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING, isFetching, id: userId })
@@ -67,6 +67,8 @@ export const toggleIsFollowing = (isFetching, userId) => ({ type: TOGGLE_IS_FOLL
 
 export const requestUsers = (page, count) => async (dispatch) => {
     dispatch(toggleIsFetching(true))
+    dispatch(setCurrentPage(page));
+
     let response = await usersApi.getUsers(page, count)
     dispatch(setUsers(response.data.items))
     dispatch(setTotalCount(response.data.totalCount))

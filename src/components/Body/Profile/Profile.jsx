@@ -1,6 +1,5 @@
 import React from 'react';
 import Preloader from '../../common/Preloader/preloader';
-import ProfileStatus from './PofileStatus/ProfileStatus';
 import ProfileStatusWithHooks from './PofileStatus/ProfileStatusWithHooks';
 import style from './Profile.module.scss'
 
@@ -18,7 +17,7 @@ const Profile = (props) => {
 			</div>
 			<div className={style.Info}>
 				<div className={style.Info__item}> {props.profile.fullName}</div>
-				<div className={style.Info__item}> {<ProfileStatus status={props.status} updateStatus={props.updateStatus}/>} </div>
+				<div className={style.Info__item}> {<ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>} </div>
 				<div className={style.Info__item}> facebook: {props.profile.contacts.facebook}</div>
 				<div className={style.Info__item}> vk: {props.profile.contacts.vk}</div>
 				<div className={style.Info__item}> twitter: {props.profile.contacts.twitter}</div>
