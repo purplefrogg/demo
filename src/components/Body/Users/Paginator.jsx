@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import style from './Paginator.module.scss'
 
 let Paginator = ({count, totalCount, portionSize=10, page, onPageChanged}) => {
-	//	let [portionNumber, setPortionNumber] = useState(Math.ceil(page / portionSize))
-	let [portionNumber, setPortionNumber] = useState(1)
+	let [portionNumber, setPortionNumber] = useState(Math.ceil(page / portionSize))
+	//let [portionNumber, setPortionNumber] = useState(1)
 
 	let pagesCount = Math.ceil(totalCount / count)
 	let pages = []

@@ -2,10 +2,11 @@ import { profileApi } from "../api/api"
 
 const SET_USER_PROFILE = 'proflie/SET_USER_PROFILE'
 const SET_STATUS = 'proflie/SET_STATUS'
+const SET_PHOTOS = 'profile/SET_PHOTOS'
 
 let initialState = {
     profile: null,
-    status: ""
+    status: "",
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -17,6 +18,10 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 status: action.status
+            } 
+        case SET_PHOTOS:
+            return {
+                ...state, profile: {...state.profile, photos: action.photos}
             }
 
         default:
@@ -25,12 +30,20 @@ const profileReducer = (state = initialState, action) => {
 }
 
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
+export const savePhotosSuccess = (photos) => ({ type: SET_PHOTOS, photos })
 
 export const setStatus = (status) => ({ type: SET_STATUS, status })
 
 export const getUserProfile = (userId) => async (dispatch) => {
         let response = await profileApi.getProfile(userId)
         dispatch(setUserProfile(response.data))
+    }
+export const savePhoto = (photo) => async (dispatch) => {
+        let response = await profileApi.updatePhoto(photo)
+        if(response.data.resultCode === 0){
+            dispatch(savePhotosSuccess(response.data.data.photos))
+        }
+
     }
 
 

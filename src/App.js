@@ -1,40 +1,43 @@
 import React from 'react';
 import { HashRouter, Route, withRouter } from 'react-router-dom';
 import { initializeApp } from './redux/app-Reducer'
-import MessengerConteiner from './components/Body/Messenger/MessengerConteiner';
 import NewsConteiner from './components/Body/News/NewsConteiner';
-import ProfileConteiner from './components/Body/Profile/ProfileConteiner';
-import UsersConteiner from './components/Body/Users/UsersConteiner';
 import HeaderContainer from './components/Header/HeaderContainer';
-import Login from './components/Login/Login';
+
 import style from './App.module.scss'
 import Navbar from './components/Body/Navbar/Navbar';
 import { compose } from 'redux';
 import { connect, Provider } from 'react-redux';
 import Preloader from './components/common/Preloader/preloader';
 import store from './redux/redux-store'
+import withSuspense from './components/hoc/withSuspense';
+const MessengerConteiner = React.lazy(() => import('./components/Body/Messenger/MessengerConteiner'));
+const UsersConteiner = React.lazy(() => import('./components/Body/Users/UsersConteiner'));
+const ProfileConteiner = React.lazy(() => import('./components/Body/Profile/ProfileConteiner'));
+const Login = React.lazy(() => import('./components/Login/Login'));
+
 
 class App extends React.Component {
-	componentDidMount(){
+	componentDidMount() {
 
-        this.props.initializeApp()
+		this.props.initializeApp()
 	}
 	render() {
-		if(!this.props.initialized){
+		if (!this.props.initialized) {
 			return <Preloader />
 		}
-		
+
 		return (
 			<div className={style.wrapper}>
 				<HeaderContainer />
 				<div className={style.body}>
 					<Navbar />
 					<div className={style.content}>
-						<Route path='/Messenger' render={() => <MessengerConteiner />} />
-						<Route path='/Users' render={() => <UsersConteiner />} />
+						<Route path='/Messenger' render={withSuspense(MessengerConteiner)}/>
+						<Route path='/Users' render={withSuspense(UsersConteiner)} />
 						<Route path='/News' render={() => <NewsConteiner />} />
-						<Route path='/Login' render={() => <Login />} />
-						<Route path='/Profile/:userId?' render={() => <ProfileConteiner />} />
+						<Route path='/Login' render={withSuspense(Login)} />
+						<Route path='/Profile/:userId?' render={withSuspense(ProfileConteiner)} />
 						<Route path='/Friends' render={() => { }} />
 					</div>
 
@@ -46,7 +49,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	return  {
+	return {
 		initialized: state.app.initialized
 	}
 }
@@ -56,12 +59,13 @@ let AppContainer = compose(
 	connect(mapStateToProps, { initializeApp }),
 )(App)
 
-const MainApp = (props) =>{
-	return(
-	<HashRouter>
-    <Provider store={store}>
-	<AppContainer />
-	</Provider>
-    </HashRouter>
-	)}
+const MainApp = (props) => {
+	return (
+		<HashRouter>
+			<Provider store={store}>
+				<AppContainer />
+			</Provider>
+		</HashRouter>
+	)
+}
 export default MainApp
