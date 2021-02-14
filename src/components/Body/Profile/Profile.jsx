@@ -1,7 +1,7 @@
 import React from 'react';
 import Preloader from '../../common/Preloader/preloader';
-import ProfileStatusWithHooks from './PofileStatus/ProfileStatusWithHooks';
 import style from './Profile.module.scss'
+import ProfileInfo from './ProfileInfo';
 
 
 const Profile = (props) => {
@@ -20,18 +20,10 @@ const Profile = (props) => {
 							alt="" />
 			</div>
 			
-			<div className={style.Info}>
-				<div className={style.Info__item}> {props.profile.fullName}</div>
-				<div className={style.Info__item}> {<ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>} </div>
-				<div className={style.Info__item}> facebook: {props.profile.contacts.facebook}</div>
-				<div className={style.Info__item}> vk: {props.profile.contacts.vk}</div>
-				<div className={style.Info__item}> twitter: {props.profile.contacts.twitter}</div>
-				<div className={style.Info__item}> instagram: {props.profile.contacts.instagram}</div>
-				<div className={style.Info__item}> github: {props.profile.contacts.github}</div>
-				<div className={style.Info__item}> mainLink: {props.profile.contacts.mainLink}</div>
-					
-			</div>
-			<input onChange={changeProfilePhoto} type="file"/>
+			<ProfileInfo profile={props.profile} isOwner={props.isOwner} saveProfile={props.saveProfile}
+			status={props.status} updateStatus={props.updateStatus} />
+			{props.isOwner && <input onChange={changeProfilePhoto} type="file"/>}
+			
 		</div>
 	)
 }

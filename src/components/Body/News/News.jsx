@@ -27,7 +27,7 @@ const News = (props) => {
 	const onSubmit = (formData) =>{
 		props.addPost(formData.text)		
     }
-	let PostItems = props.state.posts.map(post => <Post idProfile={post.idProfile} icon={post.icon} author={post.author} text={post.text} img={post.img} />)
+	let PostItems = props.state.posts.map(post => <Post key={post.idProfile} idProfile={post.idProfile} icon={post.icon} author={post.author} text={post.text} img={post.img} />)
 	return (
 		<div className={style.NewsPage}>
 			<PostReduxForm onSubmit={onSubmit}/>

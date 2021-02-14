@@ -26,6 +26,12 @@
         margin: 0 0 5px 0;
     }
 }
+.editInput{
+    display: inline;
+}
+.error{
+    border: 3px solid red;
+}
 
 @media (min-width: 660px) {
     .ProfilePage{

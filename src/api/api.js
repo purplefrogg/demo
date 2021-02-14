@@ -42,7 +42,9 @@ export const profileApi = ({
             'Content-Type': 'multipart/form-data'
           } })
     },
-
+    updateProfile(profile){
+        return instance.put(`profile`, profile)
+    }
 })
 export const authApi = ({
     me() {

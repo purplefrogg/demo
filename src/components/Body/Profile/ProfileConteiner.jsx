@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { getUserProfile, getStatus, updateStatus, savePhoto} from '../../../redux/profile-Reducer'
+import { getUserProfile, getStatus, updateStatus, savePhoto, saveProfile} from '../../../redux/profile-Reducer'
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 
@@ -15,9 +15,10 @@ class ProfileConteiner extends React.Component {
 				this.props.history.push('/Login') 
 			}
 		}
-		
-		this.props.getUserProfile(userId)
-		this.props.getStatus(userId)
+		if (userId !== null) {
+			this.props.getUserProfile(userId)
+			this.props.getStatus(userId)
+		}		
 	}
 
 	componentDidMount() {
@@ -31,7 +32,8 @@ class ProfileConteiner extends React.Component {
 	}
 	
 	render() {
-		return (<Profile profile={this.props.profile} {...this.props}/>)
+		return (<Profile profile={this.props.profile} {...this.props}
+		isOwner={!!!this.props.match.params.userId }/>)
 	}
 }
 
@@ -47,7 +49,8 @@ let mapDispatchToProps = {
 	getUserProfile,
 	getStatus,
 	updateStatus,
-	savePhoto
+	savePhoto,
+	saveProfile
 }
 
 export default compose(

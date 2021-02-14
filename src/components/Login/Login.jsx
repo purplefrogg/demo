@@ -27,7 +27,6 @@ const LoginForm = ({handleSubmit, error}) => {
     )
 }
 const LoginReduxForm = reduxForm({
-    // a unique name for the form
     form: 'login'
 })(LoginForm)
 

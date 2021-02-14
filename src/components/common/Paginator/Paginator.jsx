@@ -23,7 +23,7 @@ let Paginator = ({count, totalCount, portionSize=10, page, onPageChanged}) => {
 				<button onClick={() => setPortionNumber(portionNumber - 1)}>{'<<<'}</button>}
 			{pages
 			.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
-			.map(p => <span key={p} onClick={() => { onPageChanged(p) }} className={p === page && style.selectedPage}>{p} </span>)}
+			.map(p => <span key={p} onClick={() => { onPageChanged(p) }} className={p === page ? style.selectedPage : null}>{p} </span>)}
 			{portionCount > portionNumber &&
 			<button onClick={() => setPortionNumber(portionNumber + 1)}>{'>>>'}</button>}
 		</div>

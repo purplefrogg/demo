@@ -26,8 +26,8 @@ const MessageReduxForm = reduxForm({
 
 const Messenger = (props) => {
 	
-	let Chats = props.state.chats.map(chat =><Chat name={chat.name} id={chat.id} icon={chat.icon}/>)
-	let Messages = props.state.messages.map(mess =><Message message={mess.message}/>)
+	let Chats = props.state.chats.map(chat =><Chat key={chat.id} name={chat.name} id={chat.id} icon={chat.icon}/>)
+	let Messages = props.state.messages.map(mess =><Message key={mess.id} message={mess.message}/>)
 	
 	const onSubmit = (formData) =>{
 		props.addMessage(formData.message)
