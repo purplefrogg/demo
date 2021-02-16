@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Route, withRouter } from 'react-router-dom';
+import {  HashRouter, Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import { initializeApp } from './redux/app-Reducer'
 import NewsConteiner from './components/Body/News/NewsConteiner';
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -18,9 +18,15 @@ const Login = React.lazy(() => import('./components/Login/Login'));
 
 
 class App extends React.Component {
+	catchAllUnhandledErrors = (reason, promise) =>{
+		alert(reason)
+	}
 	componentDidMount() {
-
 		this.props.initializeApp()
+		window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors)
+	}
+	componentWillUnmount(){
+		window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors)
 	}
 	render() {
 		if (!this.props.initialized) {
@@ -33,12 +39,18 @@ class App extends React.Component {
 				<div className={style.body}>
 					<Navbar />
 					<div className={style.content}>
+						<Switch>
+						<Route exact path='/' render={() => { return <Redirect to={'/Profile'}/>}} />
 						<Route path='/Messenger' render={withSuspense(MessengerConteiner)}/>
 						<Route path='/Users' render={withSuspense(UsersConteiner)} />
 						<Route path='/News' render={() => <NewsConteiner />} />
 						<Route path='/Login' render={withSuspense(Login)} />
 						<Route path='/Profile/:userId?' render={withSuspense(ProfileConteiner)} />
 						<Route path='/Friends' render={() => { }} />
+					
+						<Route path='*' render={() => { return <div>404 not found</div>}} />
+						
+						</Switch>
 					</div>
 
 				</div>
