@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import style from './Header.module.scss'
 
-const Header = (props) => {
+const Header = (props: any) => {
         return (
         <div className={style.header}>
         <div className={style.header__logo}>
@@ -16,7 +16,6 @@ const Header = (props) => {
             </div>
             <div className={style.header__item}>
                 {props.isAuth ? <div className={style.authTrue}>
-                  
                    <button onClick={props.logout}>Log out
                      </button>
                     </div>:

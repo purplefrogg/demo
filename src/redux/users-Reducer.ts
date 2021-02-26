@@ -9,7 +9,15 @@ const SET_TOTAL_COUNT = 'users/SET_TOTAL_COUNT'
 const TOGGLE_IS_FETCHING = 'users/TOGGLE_IS_FETCHING'
 const TOGGLE_IS_FOLLOWING = 'users/TOGGLE_IS_FOLLOWING'
 
-let initialState = {
+type InitialStateType = {
+    users: any
+    totalCount: number
+    count: number
+    page: number
+    isFetching: boolean
+    isFollowing: any
+}
+let initialState: InitialStateType = {
     users: [],
     totalCount: 0,
     count: 100,
@@ -17,7 +25,7 @@ let initialState = {
     isFetching: true,
     isFollowing: []
 }
-const usersReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case FOLLOW: {
             return {
@@ -47,7 +55,7 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state, isFollowing: action.isFetching
                     ? [...state.isFollowing, action.id]
-                    : state.isFollowing.filter(id => id !== action.id)
+                    : state.isFollowing.filter((id: any) => id !== action.id)
             }
         }
         default:
@@ -56,16 +64,16 @@ const usersReducer = (state = initialState, action) => {
 
 }
 
-export const followSuccess = (userId) => ({ type: FOLLOW, id: userId })
-export const unfollowSuccess = (userId) => ({ type: UNFOLLOW, id: userId })
-export const setUsers = (users) => ({ type: SET_USERS, users })
-export const setCurrentPage = (page) => ({ type: SET_CURRENT_PAGE, page })
-export const setTotalCount = (totalCount) => ({ type: SET_TOTAL_COUNT, totalCount })
-export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
-export const toggleIsFollowing = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING, isFetching, id: userId })
+export const followSuccess = (userId: number) => ({ type: FOLLOW, id: userId })
+export const unfollowSuccess = (userId: number) => ({ type: UNFOLLOW, id: userId })
+export const setUsers = (users: any) => ({ type: SET_USERS, users })
+export const setCurrentPage = (page: number) => ({ type: SET_CURRENT_PAGE, page })
+export const setTotalCount = (totalCount: number) => ({ type: SET_TOTAL_COUNT, totalCount })
+export const toggleIsFetching = (isFetching: boolean) => ({ type: TOGGLE_IS_FETCHING, isFetching })
+export const toggleIsFollowing = (isFetching: boolean, userId: number) => ({ type: TOGGLE_IS_FOLLOWING, isFetching, id: userId })
 
 
-export const requestUsers = (page, count) => async (dispatch) => {
+export const requestUsers = (page: number, count: number) => async (dispatch: any) => {
     dispatch(toggleIsFetching(true))
     dispatch(setCurrentPage(page));
 
@@ -74,8 +82,8 @@ export const requestUsers = (page, count) => async (dispatch) => {
     dispatch(setTotalCount(response.data.totalCount))
     dispatch(toggleIsFetching(false))
 }
-export const follow = (id) =>
-    async (dispatch) => {
+export const follow = (id: number) =>
+    async (dispatch: any) => {
         dispatch(toggleIsFollowing(true, id))
         let response = await usersApi.followPost(id)
 
@@ -84,7 +92,7 @@ export const follow = (id) =>
         }
         dispatch(toggleIsFollowing(false, id))
     }
-export const unfollow = (id) => async (dispatch) => {
+export const unfollow = (id: number) => async (dispatch: any) => {
     dispatch(toggleIsFollowing(true, id))
     let response = await usersApi.followDelete(id)
     if (response.data.resultCode === 0) {

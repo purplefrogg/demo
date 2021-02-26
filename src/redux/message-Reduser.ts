@@ -1,7 +1,23 @@
 const DELETE_MESSAGE = 'message/DELETE_MESSAGE'
 const ADD_MESSAGE = 'message/ADD-MESSAGE'
 
-let initialState = {
+
+type ChatsType = {
+    id: number
+    name: string
+    icon: string
+}
+type MessagesType = {
+    id: number
+    message: string
+}
+
+export type InitialStateType = {
+    chats: Array<ChatsType>
+    messages: Array<MessagesType>
+}
+
+let initialState: InitialStateType = {
     chats: [
         { id: 1, name: 'Trish Una', icon: 'https://sun9-34.userapi.com/impf/c845420/v845420775/bafaa/hP5ZTk4e-O0.jpg?size=200x200&quality=96&proxy=1&sign=c915e9a943591bf8db59656c689429e4&type=album' },
         { id: 2, name: 'Josuke Higashikata', icon: 'https://sun9-46.userapi.com/impf/c847124/v847124775/b8f1c/vqovdaYXuwY.jpg?size=250x250&quality=96&proxy=1&sign=9a228fea6ba6a978a4828d27a37a8736&type=album' },
@@ -21,31 +37,29 @@ let initialState = {
     ],
 }
 
-const messageReducer = (state = initialState, action) => {
+const messageReducer = (state = initialState, action: any):InitialStateType => {
     switch (action.type) {
         case ADD_MESSAGE:
             return {
                 ...state,
-                messages: [
-                    ...state.messages, { message: action.message },
+                messages: [...state.messages, {id: 5, message: action.message },
                 ],
-                inputtingMessage: '',
+               
             }
         case DELETE_MESSAGE:
             return {
                 ...state,
                 messages: state.messages.filter(m => m.id !== action.userId),
-
-                inputtingMessage: '',
             }
         default:
             return state;
     }
 
 }
+type AddMessageType = { type: typeof ADD_MESSAGE, message: string}
+export const addMessage = (message: string): AddMessageType => ({ type: ADD_MESSAGE, message })
 
-export const addMessage = (message) => ({ type: ADD_MESSAGE, message })
-
-export const deleteMessage = (userId) => ({ type: DELETE_MESSAGE, userId })
+type DeleteMessageType = { type: typeof DELETE_MESSAGE, userId: number}
+export const deleteMessage = (userId: number): DeleteMessageType => ({ type: DELETE_MESSAGE, userId })
 
 export default messageReducer

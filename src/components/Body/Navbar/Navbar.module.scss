@@ -10,18 +10,19 @@
 			position: static;
 			margin: 0 0 0 0;
 			min-height: 50px;
-			font-size: 12px;
-			line-height: 15px;
+			font-size: 15px;
+			line-height: 3em;
 			display: grid;
 			grid-template: 1fr / repeat(4 , 1fr);
-			.navbar__item{
-
+			
 				.navbar__label{
-					max-width: 100%;
-					display: block;
-					text-align: center;
 					
+					text-align: center;
+					vertical-align: middle;
 					color: #fff;
+					&:hover{
+						color: #000;
+					}
 					&.active{
 						color: #000;
 						
@@ -31,8 +32,6 @@
 					max-width: 25px;		
 					max-height: 25px;
 				}
-			
-			}
 		}
 	}
 
@@ -52,23 +51,20 @@
 				line-height: 27px;
 				grid-template: repeat(4 , 1fr) / 1fr;
 				
-				gap: 10px;
-				.navbar__item{
-					
-					& img{
-						display: inline;
 
-					}
+				
 					.navbar__label{
+						line-height: 2em;
+						
 						text-align: left;
-						color: #181732;
+				
 						width: 150px;
 						display: block;
 						&.active{
 							color: #fff;
 							background-color: #2d2d59;
 						}
-					}
+					
 				}
 			}
 		}

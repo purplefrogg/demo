@@ -4,7 +4,7 @@ import messageReducer from "./message-Reduser";
 import newsReducer from "./news-Reducer";
 import profileReducer from "./profile-Reducer";
 import usersReducer from "./users-Reducer";
-import appReducer from "./app-Reducer";
+import appReducer from "./app-Reducer.ts";
 import thunkMiddleware from 'redux-thunk'
 import { reducer as formReducer } from 'redux-form'
 
