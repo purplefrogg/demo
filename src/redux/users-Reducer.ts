@@ -1,5 +1,6 @@
 import { usersApi } from "../api/api"
 import { updateObjectInArray } from "../utils/object-Helpers"
+import { PhotosType } from "./profile-Reducer"
 
 const FOLLOW = 'users/FOLLOW'
 const UNFOLLOW = 'users/UNFOLLOW'
@@ -9,13 +10,20 @@ const SET_TOTAL_COUNT = 'users/SET_TOTAL_COUNT'
 const TOGGLE_IS_FETCHING = 'users/TOGGLE_IS_FETCHING'
 const TOGGLE_IS_FOLLOWING = 'users/TOGGLE_IS_FOLLOWING'
 
+export type UserType = {
+    name:string
+    id: number
+    photos: PhotosType
+    status: string 
+    followed: boolean
+}
 type InitialStateType = {
-    users: any
+    users: Array<UserType>
     totalCount: number
     count: number
     page: number
     isFetching: boolean
-    isFollowing: any
+    isFollowing: Array<number>
 }
 let initialState: InitialStateType = {
     users: [],
@@ -55,7 +63,7 @@ const usersReducer = (state = initialState, action: any): InitialStateType => {
             return {
                 ...state, isFollowing: action.isFetching
                     ? [...state.isFollowing, action.id]
-                    : state.isFollowing.filter((id: any) => id !== action.id)
+                    : state.isFollowing.filter((id: number) => id !== action.id)
             }
         }
         default:

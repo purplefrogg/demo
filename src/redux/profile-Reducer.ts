@@ -15,11 +15,11 @@ type ContactsType ={
     youtube: string
     mainLink: string
 }
-type PhotosType = {
+export type PhotosType = {
     small: string
     large: string
 }
-type ProfileType = {
+export type ProfileType = {
     userId: number 
     aboutMe: string
     lookingForAJob: boolean

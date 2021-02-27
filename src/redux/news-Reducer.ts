@@ -1,6 +1,6 @@
 const ADD_POST = 'news/ADD-POST'
 
-type PostsType = {
+export type PostType = {
     idProfile: string
     author: string
     text: string
@@ -8,7 +8,7 @@ type PostsType = {
     img: string | null
 }
 export type InitialStateType = {
-    posts: Array<PostsType>
+    posts: Array<PostType>
 }
 let initialState: InitialStateType = {
     posts: [

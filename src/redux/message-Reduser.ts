@@ -2,12 +2,12 @@ const DELETE_MESSAGE = 'message/DELETE_MESSAGE'
 const ADD_MESSAGE = 'message/ADD-MESSAGE'
 
 
-type ChatsType = {
+export type ChatsType = {
     id: number
     name: string
     icon: string
 }
-type MessagesType = {
+export type MessagesType = {
     id: number
     message: string
 }
