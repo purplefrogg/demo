@@ -1,5 +1,7 @@
-import { stopSubmit } from "redux-form"
+import { FormAction, stopSubmit } from "redux-form"
+import { ThunkAction } from "redux-thunk"
 import { profileApi } from "../api/api"
+import { AppReducerType } from "./redux-store"
 
 const SET_USER_PROFILE = 'proflie/SET_USER_PROFILE'
 const SET_STATUS = 'proflie/SET_STATUS'
@@ -64,18 +66,25 @@ export const savePhotosSuccess = (photos: PhotosType): savePhotosSuccessActionTy
 type setStatusActionType = { type: typeof SET_STATUS, status: string }
 export const setStatus = (status: string):setStatusActionType => ({ type: SET_STATUS, status })
 
-export const getUserProfile = (userId: number) => async (dispatch: any) => {
+
+
+type ActionTypes = setStatusActionType | savePhotosSuccessActionType
+| FormAction | SetUserProfileActionType
+type ThunkActionType = ThunkAction<void, AppReducerType, unknown, ActionTypes>
+
+
+export const getUserProfile = (userId: number | null): ThunkActionType => async (dispatch) => {
     let response = await profileApi.getProfile(userId)
     dispatch(setUserProfile(response.data))
 }
-export const savePhoto = (photo: PhotosType) => async (dispatch: any) => {
+export const savePhoto = (photo: PhotosType): ThunkActionType => async (dispatch) => {
     let response = await profileApi.updatePhoto(photo)
     if (response.data.resultCode === 0) {
         dispatch(savePhotosSuccess(response.data.data.photos))
     }
 
 }
-export const saveProfile = (profile: ProfileType) => async (dispatch: any, getState: any) => {
+export const saveProfile = (profile: ProfileType): ThunkActionType => async (dispatch, getState) => {
     const userId = getState().auth.userId
     const response = await profileApi.updateProfile(profile)
     if (response.data.resultCode === 0) {
@@ -87,12 +96,12 @@ export const saveProfile = (profile: ProfileType) => async (dispatch: any, getSt
     }
 }
 
-export const getStatus = (userId: number) => async (dispatch: any) => {
+export const getStatus = (userId: number): ThunkActionType => async (dispatch) => {
     let response = await profileApi.getStatus(userId)
     dispatch(setStatus(response.data))
 }
 
-export const updateStatus = (status: string) => async (dispatch: any) => {
+export const updateStatus = (status: string): ThunkActionType => async (dispatch) => {
     try {
         let response = await profileApi.updateStatus(status)
         if (response.data.resultCode === 0) {
