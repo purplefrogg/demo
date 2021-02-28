@@ -73,7 +73,7 @@ type ActionTypes = setStatusActionType | savePhotosSuccessActionType
 type ThunkActionType = ThunkAction<void, AppReducerType, unknown, ActionTypes>
 
 
-export const getUserProfile = (userId: number | null): ThunkActionType => async (dispatch) => {
+export const getUserProfile = (userId: null | number): ThunkActionType => async (dispatch) => {
     let response = await profileApi.getProfile(userId)
     dispatch(setUserProfile(response.data))
 }
