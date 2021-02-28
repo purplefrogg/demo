@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import style from './Header.module.scss'
 
@@ -7,7 +7,7 @@ type PropsType = {
   logout: () => void
 }
 
-const Header = (props: PropsType) => {
+const Header: FC<PropsType> = (props) => {
         return (
         <div className={style.header}>
         <div className={style.header__logo}>

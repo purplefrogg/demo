@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import style from './News.module.scss'
 import Post from '../../common/Post/Post'
 import { Field, reduxForm } from 'redux-form';
@@ -28,7 +28,7 @@ const PostReduxForm = reduxForm({
 	form: 'post'
 })(PostForm)
 
-const News = (props: PropsType) => {
+const News: FC<PropsType> = (props) => {
 
 	const onSubmit = (formData: any) =>{
 		props.addPost(formData.text)		

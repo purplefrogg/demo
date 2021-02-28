@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { UserType } from '../../../redux/users-Reducer';
 import style from './Users.module.scss'
@@ -11,7 +11,7 @@ type PropsType = {
 	unfollow: (id: number)=> void
 }
 
-const User = ({user, ...props}: PropsType) => {
+const User: FC<PropsType> = ({user, ...props}) => {
 	return (
 		<div className={style.User} key={user.id}>
 			<NavLink className={style.avatar} to={`/Profile/${user.id}`}>

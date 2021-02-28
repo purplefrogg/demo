@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { ChatsType, MessagesType } from '../../../redux/message-Reduser';
 
@@ -31,7 +31,7 @@ const MessageReduxForm = reduxForm({
     form: 'message'
   })(MessageForm)
 
-const Messenger = (props: PropsType) => {
+const Messenger: FC<PropsType> = (props) => {
 	
 	let Chats = props.chats.map(chat =><Chat key={chat.id} chat={chat}/>)
 	let Messages = props.messages.map(mess =><Message key={mess.id} message={mess}/>)

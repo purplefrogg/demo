@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ChatsType } from '../../../../redux/message-Reduser';
 import style from './Chat.module.scss'
@@ -9,7 +9,7 @@ type PropsType = {
 }
 
 
-const Chat = ({chat}: PropsType) => {
+const Chat: FC<PropsType> = ({chat}) => {
 	let path = '/Messenger/' + chat.id
 	return (
 	<NavLink to={path} activeClassName={style.active} className={style.chat}>

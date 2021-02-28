@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { UserType } from '../../../redux/users-Reducer';
 import Paginator from '../../common/Paginator/Paginator';
 import Preloader from '../../common/Preloader/preloader';
@@ -19,7 +19,7 @@ type PropsType = {
 	onPageChanged: (pageNumber: number) => void
 }
 
-const Users = (props: PropsType) => {
+const Users: FC<PropsType> = (props) => {
 	return (
 		<div className={style.UsersPage}>
 			<Paginator count={props.count}
