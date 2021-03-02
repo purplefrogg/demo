@@ -10,7 +10,7 @@ const Post = (props) => {
                 <div className={style.icon}>
                     <img src={props.icon} alt="" />
                 </div>
-                    <NavLink to={props.idProfile}>
+                    <NavLink to={"/" + props.idProfile}>
                 <div className={style.author}>{props.author}</div>
                 </NavLink>
                 

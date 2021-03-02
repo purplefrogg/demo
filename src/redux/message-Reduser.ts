@@ -30,10 +30,10 @@ let initialState: InitialStateType = {
         { id: 9, name: 'Hisoka', icon: 'https://i.pinimg.com/564x/fc/0a/ec/fc0aec5184be7873b54ccb0a375e632c.jpg' },
     ],
     messages: [
-        { id: 1, message: 'who are you' },
-        { id: 2, message: 'I am DIO BRANDO' },
-        { id: 3, message: 'who are you' },
-        { id: 4, message: 'I am DIO BRANDO' },
+        { id: 0, message: 'who are you' },
+        { id: 1, message: 'I am DIO BRANDO' },
+        { id: 2, message: 'who are you' },
+        { id: 3, message: 'I am DIO BRANDO' },
     ],
 }
 
@@ -42,7 +42,7 @@ const messageReducer = (state = initialState, action: any):InitialStateType => {
         case ADD_MESSAGE:
             return {
                 ...state,
-                messages: [...state.messages, {id: 5, message: action.message },
+                messages: [...state.messages, {id: state.messages.length, message: action.message },
                 ],
                
             }

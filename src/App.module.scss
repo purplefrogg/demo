@@ -20,17 +20,20 @@
 	grid-area: body;
 	display: grid;
 	grid-template: 1fr 50px/ 1fr;
+		
 	.content{
+		
 		color: #fff;
 		grid-row: 1 / 2;
-
+		
 	}
+	
 }
-
 
 @media (min-width: 660px) {
 	.body {
-		height: calc(100vh - 50px);
+		
+		height: 100%;
 		grid-area: body;
 		grid-template: 1fr / 1fr 150px minmax(auto, 800px) 1fr;
 			.content {
@@ -38,9 +41,7 @@
 				background-color: #181732;
 				
 			}
-		}
-
-	
+		}	
 }
 
 @media (min-width: 1600px) {

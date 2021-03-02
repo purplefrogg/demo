@@ -5,8 +5,11 @@
 		height: 50px;
 		background-color: #424283;
 		grid-row: 2 / 3;
-
+	
+		
 		.navbar__list {
+			transition-duration: 0.5s;
+			transition-property: all;
 			position: static;
 			margin: 0 0 0 0;
 			min-height: 50px;
@@ -16,9 +19,7 @@
 			grid-template: 1fr / repeat(4 , 1fr);
 			
 				.navbar__label{
-					
 					text-align: center;
-					vertical-align: middle;
 					color: #fff;
 					&:hover{
 						color: #000;
@@ -50,21 +51,15 @@
 				font-size: 16px;
 				line-height: 27px;
 				grid-template: repeat(4 , 1fr) / 1fr;
-				
-
-				
 					.navbar__label{
-						line-height: 2em;
-						
+						line-height: 2em;						
 						text-align: left;
-				
 						width: 150px;
 						display: block;
 						&.active{
 							color: #fff;
 							background-color: #2d2d59;
 						}
-					
 				}
 			}
 		}
