@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { getUserProfile, getStatus, updateStatus, saveProfile, ProfileType} from '../../../redux/profile-Reducer'
+import { getUserProfile, getStatus, updateStatus, saveProfile, ProfileType, savePhoto} from '../../../redux/profile-Reducer'
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { AppReducerType } from '../../../redux/redux-store';
@@ -67,7 +67,8 @@ let mapDispatchToProps = {
 	getUserProfile,
 	getStatus,
 	updateStatus,
-	saveProfile
+	saveProfile,
+	savePhoto
 }
 
 export default compose(

@@ -1,11 +1,81 @@
 import { FormAction, stopSubmit } from "redux-form"
 import { ThunkAction } from "redux-thunk"
-import { profileApi } from "../api/api"
-import { AppReducerType } from "./redux-store"
+import { ResultCodeEnum } from "../api/api"
+import { profileApi } from "../api/profileApi"
+import { BaseThunkType, InferActionsTypes } from "./redux-store"
 
-const SET_USER_PROFILE = 'proflie/SET_USER_PROFILE'
-const SET_STATUS = 'proflie/SET_STATUS'
-const SET_PHOTOS = 'profile/SET_PHOTOS'
+let initialState = {
+    profile: null as ProfileType | null,
+    status: "" as string,
+}
+
+const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
+    switch (action.type) {
+        case 'proflie/SET_USER_PROFILE':
+            return { ...state, profile: action.profile }
+        case 'proflie/SET_STATUS':
+            return {
+                ...state,
+                status: action.status
+            }
+        case 'profile/SET_PHOTOS':
+            return {
+                ...state, profile: { ...state.profile, photos: action.photos } as ProfileType
+            }
+        default:
+            return state
+    }
+}
+
+const actions = {
+    setUserProfile: (profile: ProfileType) => ({ type: 'proflie/SET_USER_PROFILE', profile } as const),
+    savePhotosSuccess: (photos: PhotosType) => ({ type: 'profile/SET_PHOTOS', photos } as const),
+    setStatus: (status: string) => ({ type: 'proflie/SET_STATUS', status } as const)
+}
+
+
+export const getUserProfile = (userId: number): ThunkType => async (dispatch) => {
+    let data = await profileApi.getProfile(userId)
+    dispatch(actions.setUserProfile(data))
+}
+export const savePhoto = (photo: File): ThunkType => async (dispatch) => {
+    let data = await profileApi.updatePhoto(photo)
+    if (data.resultCode === 0) {
+        dispatch(actions.savePhotosSuccess(data.data.photos))
+    }
+
+}
+export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch, getState: any) => {
+    const userId = getState().auth.userId
+    const data = await profileApi.updateProfile(profile)
+    if (data.resultCode === 0) {
+        dispatch(getUserProfile(userId))
+    } else {
+        dispatch(stopSubmit("ProfileData", { _error: data.messages[0] }))
+
+        return Promise.reject(data.messages[0])
+    }
+}
+export const getStatus = (userId: number): ThunkType => async (dispatch) => {
+    let data = await profileApi.getStatus(userId)
+    dispatch(actions.setStatus(data))
+}
+export const updateStatus = (status: string): ThunkType => async (dispatch) => {
+    try {
+        let data = await profileApi.updateStatus(status)
+        if (data.resultCode === ResultCodeEnum.success) {
+            dispatch(actions.setStatus(status))
+        }
+    } catch (error) {
+        alert(error)
+    }
+}
+
+export default profileReducer
+
+export type InitialStateType = typeof initialState
+type ActionsType = InferActionsTypes<typeof actions>
+type ThunkType =BaseThunkType<ActionsType | FormAction>
 
 type ContactsType ={
     github: string
@@ -30,86 +100,3 @@ export type ProfileType = {
     contacts: ContactsType
     photos: PhotosType
 }
-
-export type InitialStateType = {
-    profile: ProfileType | null;
-    status: string;
-}
-let initialState: InitialStateType = {
-    profile: null,
-    status: "",
-}
-
-const profileReducer = (state = initialState, action: any): InitialStateType => {
-    switch (action.type) {
-        case SET_USER_PROFILE:
-            return { ...state, profile: action.profile }
-        case SET_STATUS:
-            return {
-                ...state,
-                status: action.status
-            }
-        case SET_PHOTOS:
-            return {
-                ...state, profile: { ...state.profile, photos: action.photos } as ProfileType
-            }
-        default:
-            return state
-    }
-}
-type SetUserProfileActionType = { type: typeof SET_USER_PROFILE, profile: ProfileType}
-export const setUserProfile = (profile: ProfileType): SetUserProfileActionType => ({ type: SET_USER_PROFILE, profile })
-
-type savePhotosSuccessActionType = { type: typeof SET_PHOTOS, photos: PhotosType }
-export const savePhotosSuccess = (photos: PhotosType): savePhotosSuccessActionType => ({ type: SET_PHOTOS, photos })
-
-type setStatusActionType = { type: typeof SET_STATUS, status: string }
-export const setStatus = (status: string):setStatusActionType => ({ type: SET_STATUS, status })
-
-
-
-type ActionTypes = setStatusActionType | savePhotosSuccessActionType
-| FormAction | SetUserProfileActionType
-type ThunkActionType = ThunkAction<void, AppReducerType, unknown, ActionTypes>
-
-
-export const getUserProfile = (userId: null | number): ThunkActionType => async (dispatch) => {
-    let response = await profileApi.getProfile(userId)
-    dispatch(setUserProfile(response.data))
-}
-export const savePhoto = (photo: PhotosType): ThunkActionType => async (dispatch) => {
-    let response = await profileApi.updatePhoto(photo)
-    if (response.data.resultCode === 0) {
-        dispatch(savePhotosSuccess(response.data.data.photos))
-    }
-
-}
-export const saveProfile = (profile: ProfileType): ThunkActionType => async (dispatch, getState) => {
-    const userId = getState().auth.userId
-    const response = await profileApi.updateProfile(profile)
-    if (response.data.resultCode === 0) {
-        dispatch(getUserProfile(userId))
-    } else {
-        dispatch(stopSubmit("ProfileData", { _error: response.data.messages[0] }))
-
-        return Promise.reject(response.data.messages[0])
-    }
-}
-
-export const getStatus = (userId: number): ThunkActionType => async (dispatch) => {
-    let response = await profileApi.getStatus(userId)
-    dispatch(setStatus(response.data))
-}
-
-export const updateStatus = (status: string): ThunkActionType => async (dispatch) => {
-    try {
-        let response = await profileApi.updateStatus(status)
-        if (response.data.resultCode === 0) {
-            dispatch(setStatus(status))
-        }
-    } catch (error) {
-        alert(error)
-    }
-}
-
-export default profileReducer
