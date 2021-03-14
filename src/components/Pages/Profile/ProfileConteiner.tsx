@@ -4,26 +4,27 @@ import Profile from './Profile';
 import { getUserProfile, getStatus, updateStatus, saveProfile, ProfileType, savePhoto} from '../../../redux/profile-Reducer'
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { AppReducerType } from '../../../redux/redux-store';
+import { AppStateType } from '../../../redux/redux-store';
 
-type MapStateToPropsType = {
+type MapPropsType = {
 	profile: ProfileType | null
 	status: string
 	myId: number | null
 }
 
-type MapDispatchToPropsType = {
+type MapDispatchPropsType = {
 	getUserProfile: (userId: number) => void
     getStatus: (userId: number) => void
     updateStatus: (status: string) => void
-    saveProfile: (profile: ProfileType) => void
+    saveProfile: (profile: ProfileType) => Promise<any>
+	savePhoto: (photo: File)=> void
 }
 type OwmPropsType = {
 	match: any
 	history: any
 }
 
-type PropsType = MapDispatchToPropsType & MapStateToPropsType & OwmPropsType
+type PropsType = MapDispatchPropsType & MapPropsType & OwmPropsType
 class ProfileConteiner extends React.Component<PropsType> {
 	refreshProfile(){
 		let userId = this.props.match.params.userId
@@ -51,12 +52,12 @@ class ProfileConteiner extends React.Component<PropsType> {
 	
 	render() {
 		return (<Profile profile={this.props.profile} {...this.props}
-		isOwner={!!!this.props.match.params.userId }/>)
+		isOwner={!this.props.match.params.userId }/>)
 	}
 }
 
 
-let mapStateToProps = (state: AppReducerType) => {
+let mapStateToProps = (state: AppStateType) => {
 	return {
 		profile: state.profilePage.profile,
 		myId: state.auth.userId,
@@ -71,7 +72,7 @@ let mapDispatchToProps = {
 	savePhoto
 }
 
-export default compose(
+export default compose<React.ComponentType>(
 	connect(mapStateToProps, mapDispatchToProps),
 	withRouter,
 	

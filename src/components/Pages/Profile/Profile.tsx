@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
+import { ProfileType } from '../../../redux/profile-Reducer';
 import Preloader from '../../common/Preloader/preloader';
 import style from './Profile.module.scss'
 import ProfileInfo from './ProfileInfo';
+ 
 
+type PropsType = {
+	profile: ProfileType | null
+	status: string
+	myId: number | null
+	isOwner: boolean
 
-const Profile = (props) => {
-	const changeProfilePhoto = (e) =>{
-		let photo = e.currentTarget.files[0]
-		props.savePhoto(photo)
+	getUserProfile: (userId: number) => void
+    getStatus: (userId: number) => void
+    updateStatus: (status: string) => void
+    saveProfile: (profile: ProfileType) => Promise<any>
+
+	savePhoto: (photo: File)=> void
+}
+
+const Profile: React.FC<PropsType> = (props) => {
+	const changeProfilePhoto = (e: ChangeEvent<HTMLInputElement>) =>{
+		if (e.target.files && e.target.files.length) {
+            props.savePhoto(e.target.files[0]);
+        }
 	}
 	if(!props.profile){
 		return <Preloader></Preloader>

@@ -1,25 +1,30 @@
 import React from 'react';
 import {  HashRouter, Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import { initializeApp } from './redux/app-Reducer'
-import NewsConteiner from './components/Body/News/NewsConteiner';
+import NewsConteiner from './components/Pages/News/NewsConteiner';
 import HeaderContainer from './components/Header/HeaderContainer';
 
 import style from './App.module.scss'
-import Navbar from './components/Body/Navbar/Navbar';
+import Navbar from './components/Pages/Navbar/Navbar';
 import { compose } from 'redux';
 import { connect, Provider } from 'react-redux';
 import Preloader from './components/common/Preloader/preloader';
-import store from './redux/redux-store'
+import store, { AppStateType } from './redux/redux-store'
 import withSuspense from './components/hoc/withSuspense';
-const MessengerConteiner = React.lazy(() => import('./components/Body/Messenger/MessengerConteiner'));
-const UsersConteiner = React.lazy(() => import('./components/Body/Users/UsersConteiner'));
-const ProfileConteiner = React.lazy(() => import('./components/Body/Profile/ProfileConteiner'));
+const MessengerConteiner = React.lazy(() => import('./components/Pages/Messenger/MessengerConteiner'));
+const UsersConteiner = React.lazy(() => import('./components/Pages/Users/UsersConteiner'));
+const ProfileConteiner = React.lazy(() => import('./components/Pages/Profile/ProfileConteiner'));
 const Login = React.lazy(() => import('./components/Login/Login'));
 
+type MapPropsType = ReturnType<typeof mapStateToProps>
 
-class App extends React.Component {
-	catchAllUnhandledErrors = (reason, promise) =>{
-		alert(reason)
+type DispatchPropsType = {
+	initializeApp: () => void
+}
+
+class App extends React.Component<MapPropsType & DispatchPropsType> {
+	catchAllUnhandledErrors = (e: PromiseRejectionEvent) =>{
+		alert('some error')
 	}
 	componentDidMount() {
 		this.props.initializeApp()
@@ -46,7 +51,7 @@ class App extends React.Component {
 						<Route path='/News' render={() => <NewsConteiner />} />
 						<Route path='/Login' render={withSuspense(Login)} />
 						<Route path='/Profile/:userId?' render={withSuspense(ProfileConteiner)} />
-						<Route path='/Friends' render={() => { }} />
+						<Route path='/Friends' render={() => null } />
 					
 						<Route path='*' render={() => { return <div>404 not found</div>}} />
 						
@@ -60,18 +65,18 @@ class App extends React.Component {
 
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType) => {
 	return {
 		initialized: state.app.initialized
 	}
 }
 
-let AppContainer = compose(
+let AppContainer = compose<React.ComponentType>(
 	withRouter,
 	connect(mapStateToProps, { initializeApp }),
 )(App)
 
-const MainApp = (props) => {
+const MainApp = () => {
 	return (
 		<HashRouter>
 			<Provider store={store}>

@@ -20,13 +20,13 @@ type PropsType = {
 }
 
 const Users: FC<PropsType> = (props) => {
+	let Paginators = <Paginator count={props.count}
+		totalCount={props.totalCount}
+		page={props.page}
+		onPageChanged={props.onPageChanged} />
 	return (
 		<div className={style.UsersPage}>
-			<Paginator count={props.count}
-				totalCount={props.totalCount}
-				page={props.page}
-				onPageChanged={props.onPageChanged} />
-
+			{Paginators}
 			{props.isFetching ? <Preloader /> : <div >
 				{props.users.map((user: UserType) => <User user={user}
 					isFollowing={props.isFollowing}
@@ -34,10 +34,7 @@ const Users: FC<PropsType> = (props) => {
 					key={user.id}
 					unfollow={props.unfollow}
 				/>)}
-					<Paginator count={props.count}
-				totalCount={props.totalCount}
-				page={props.page}
-				onPageChanged={props.onPageChanged} />
+				{Paginators}
 			</div>}
 		</div>
 	)

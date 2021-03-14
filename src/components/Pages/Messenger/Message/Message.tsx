@@ -8,7 +8,7 @@ type PropsType = {
 }
 const Message: FC<PropsType> = ({message}) => {
 	return (
-		<div className={style.message}>{message.message}</div>
+		<div className={style.message}>{message.text}</div>
 	)
 }
 

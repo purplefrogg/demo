@@ -6,7 +6,7 @@ type PropsType = {
 	link: string
 	label: string
 }
-const NavbarItem = (props: PropsType) => {
+const NavbarItem: React.FC<PropsType>= (props) => {
 	return (
 			<NavLink to={props.link} activeClassName={style.active} className={style.navbar__label}>{props.label}</NavLink>
 	)

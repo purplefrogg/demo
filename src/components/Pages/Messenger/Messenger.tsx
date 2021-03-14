@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
-import { Field, reduxForm } from 'redux-form'
+import { FC } from 'react';
+import { InjectedFormProps, reduxForm } from 'redux-form'
 import { ChatsType, MessagesType } from '../../../redux/message-Reduser';
+import { required } from '../../../utils/validators/validators';
 
-import { inputElement } from '../../common/FormsControls/FormsControls';
+import { createField, Input } from '../../common/FormsControls/FormsControls';
 import Chat from './Chat/Chat';
 import Message from './Message/Message';
 import style from './Messenger.module.scss'
@@ -14,31 +15,26 @@ type PropsType = {
 	addMessage: (message: string)=>void
 }
 
-const input = inputElement("input")
-
-const MessageForm = (props:any) => {
-
+const MessageForm: React.FC<InjectedFormProps<MessagesType>>= (props) => {
     return (
            <form onSubmit={props.handleSubmit}  className={style.input}>
-				<Field name={'message'}  component={input}
-				className={style.inputArea} />
+			   {createField('message', Input, [required], null, {className: style.inputArea})}
 				<button className={style.btnEnter}>enter</button>
 			</form>
     )
 }
-const MessageReduxForm = reduxForm({
-    // a unique name for the form
+const MessageReduxForm = reduxForm<MessagesType>({
     form: 'message'
   })(MessageForm)
 
-const Messenger: FC<PropsType> = (props) => {
+const Messenger: FC<PropsType> = ({chats, messages,...props}) => {
 	
-	let Chats = props.chats.map(chat =><Chat key={chat.id} chat={chat}/>)
-	let Messages = props.messages.map(mess =><Message key={mess.id} message={mess}/>)
+	let Chats = chats.map(chat =><Chat key={chat.id} chat={chat}/>)
+	let Messages = messages.map(mess =><Message key={mess.id} message={mess}/>)
 	
-	const onSubmit = (formData: any) =>{
-		props.addMessage(formData.message)
-		formData.message = ''	
+	const onSubmit = (formData: MessagesType) =>{
+		formData.text && props.addMessage(formData.text)
+		formData.text = ''	
     }
 	return (
 		<div className={style.Messenger}>

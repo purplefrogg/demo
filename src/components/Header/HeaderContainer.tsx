@@ -1,7 +1,7 @@
 import { logout } from '../../redux/auth-Reducer'
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
-import { AppReducerType } from '../../redux/redux-store';
+import { AppStateType } from '../../redux/redux-store';
 import Header from './Header';
 
 type PropsType = {
@@ -12,7 +12,7 @@ const HeaderContainer: FC<PropsType> = (props) => {
     return <Header {...props} />
 }
 
-let mapStateToProps = (state: AppReducerType) => ({
+let mapStateToProps = (state: AppStateType) => ({
     isAuth: state.auth.isAuth,
 })
 

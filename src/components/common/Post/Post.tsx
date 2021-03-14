@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { PostType } from '../../../redux/news-Reducer';
 import style from './Post.module.scss'
 
-const Post = (props) => {
+const Post: React.FC<PostType> = (props) => {
     
     return (
         <div className={style.post}>

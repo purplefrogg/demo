@@ -1,24 +1,21 @@
 
+import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { addMessage } from '../../../redux/message-Reduser';
-import { AppReducerType } from '../../../redux/redux-store';
+import { AppStateType } from '../../../redux/redux-store';
 import withAuthRedirect from '../../hoc/withAuthRedirect';
 import Messenger from './Messenger';
 
 
-let mapStateToProps = (state: AppReducerType) => {
+let mapStateToProps = (state: AppStateType) => {
 	return {
 		chats: state.messenger.chats,
 		messages: state.messenger.messages
 	}
 }
-let mapDispatchToProps = {
-	addMessage,
-}
 
-
-export default compose(
-	connect(mapStateToProps, mapDispatchToProps),
+export default compose<React.ComponentType>(
+	connect(mapStateToProps, {addMessage}),
 	withAuthRedirect
 )(Messenger);

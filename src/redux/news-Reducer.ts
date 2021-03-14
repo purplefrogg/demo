@@ -5,7 +5,7 @@ export type PostType = {
     author: string
     text: string
     icon: string
-    img: string | null
+    img: string | undefined
 }
 export type InitialStateType = {
     posts: Array<PostType>
@@ -26,7 +26,7 @@ const newsReducer = (state = initialState, action: any): InitialStateType => {
                     {   icon: 'https://sun9-34.userapi.com/impf/c845420/v845420775/bafaa/hP5ZTk4e-O0.jpg?size=200x200&quality=96&proxy=1&sign=c915e9a943591bf8db59656c689429e4&type=album',
                         text: action.text,
                         idProfile: state.posts.length , author: 'Trish Una',
-                        img: null
+                        img: undefined
                     },
                     ...state.posts,
                 ]

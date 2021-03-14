@@ -3,7 +3,7 @@ import { requestUsers, follow, unfollow, UserType} from '../../../redux/users-Re
 import Users from './Users';
 import React from 'react';
 import { getUsers, getCount, getIsFetching, getIsFollowing, getPage, getTotalCount } from '../../../redux/users-selectors';
-import { AppReducerType } from '../../../redux/redux-store';
+import { AppStateType } from '../../../redux/redux-store';
 
 
 type MapStateToPropsType = {
@@ -53,7 +53,7 @@ class UsersConteiner extends React.Component<PropsType> {
 	} 
 
 
-let mapStateToProps = (state: AppReducerType):MapStateToPropsType => {
+let mapStateToProps = (state: AppStateType):MapStateToPropsType => {
 	
 	return {
         users: getUsers(state),
@@ -71,4 +71,4 @@ let mapDispatchToProps = {
 	requestUsers,
 }
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, OwmPropsType, AppReducerType>(mapStateToProps, mapDispatchToProps)(UsersConteiner)
+export default connect<MapStateToPropsType, MapDispatchToPropsType, OwmPropsType, AppStateType>(mapStateToProps, mapDispatchToProps)(UsersConteiner)

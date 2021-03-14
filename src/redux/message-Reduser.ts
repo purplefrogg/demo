@@ -9,7 +9,7 @@ export type ChatsType = {
 }
 export type MessagesType = {
     id: number
-    message: string
+    text: string
 }
 
 export type InitialStateType = {
@@ -30,10 +30,10 @@ let initialState: InitialStateType = {
         { id: 9, name: 'Hisoka', icon: 'https://i.pinimg.com/564x/fc/0a/ec/fc0aec5184be7873b54ccb0a375e632c.jpg' },
     ],
     messages: [
-        { id: 0, message: 'who are you' },
-        { id: 1, message: 'I am DIO BRANDO' },
-        { id: 2, message: 'who are you' },
-        { id: 3, message: 'I am DIO BRANDO' },
+        { id: 0, text: 'who are you' },
+        { id: 1, text: 'I am DIO BRANDO' },
+        { id: 2, text: 'who are you' },
+        { id: 3, text: 'I am DIO BRANDO' },
     ],
 }
 
@@ -42,7 +42,7 @@ const messageReducer = (state = initialState, action: any):InitialStateType => {
         case ADD_MESSAGE:
             return {
                 ...state,
-                messages: [...state.messages, {id: state.messages.length, message: action.message },
+                messages: [...state.messages, {id: state.messages.length, text: action.message },
                 ],
                
             }

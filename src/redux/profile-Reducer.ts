@@ -1,5 +1,4 @@
 import { FormAction, stopSubmit } from "redux-form"
-import { ThunkAction } from "redux-thunk"
 import { ResultCodeEnum } from "../api/api"
 import { profileApi } from "../api/profileApi"
 import { BaseThunkType, InferActionsTypes } from "./redux-store"
@@ -77,8 +76,8 @@ export type InitialStateType = typeof initialState
 type ActionsType = InferActionsTypes<typeof actions>
 type ThunkType =BaseThunkType<ActionsType | FormAction>
 
-type ContactsType ={
-    github: string
+export type ContactsType ={
+    github: string 
     vk: string
     facebook: string
     instagram: string
