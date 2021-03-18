@@ -61,7 +61,7 @@ const usersReducer = (state = initialState, action: ActionsType): InitialStateTy
 export const actions = {
     followSuccess: (userId: number) => ({ type: 'FOLLOW', id: userId } as const),
     unfollowSuccess: (userId: number) => ({ type: 'UNFOLLOW', id: userId } as const),
-    setUsers: (users: any) => ({ type: 'SET_USERS', users } as const),
+    setUsers: (users:  Array<UserType>,) => ({ type: 'SET_USERS', users } as const),
     setCurrentPage: (page: number) => ({ type: 'SET_CURRENT_PAGE', page } as const),
     setTotalCount: (totalCount: number) => ({ type: 'SET_TOTAL_COUNT', totalCount } as const),
     toggleIsFetching: (isFetching: boolean) => ({ type: 'TOGGLE_IS_FETCHING', isFetching } as const),
