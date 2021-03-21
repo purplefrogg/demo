@@ -42,7 +42,7 @@ const messageReducer = (state = initialState, action: any):InitialStateType => {
         case ADD_MESSAGE:
             return {
                 ...state,
-                messages: [...state.messages, {id: state.messages.length, text: action.message },
+                messages: [...state.messages, {id: state.messages.length, text: action.text },
                 ],
                
             }
@@ -56,8 +56,8 @@ const messageReducer = (state = initialState, action: any):InitialStateType => {
     }
 
 }
-type AddMessageType = { type: typeof ADD_MESSAGE, message: string}
-export const addMessage = (message: string): AddMessageType => ({ type: ADD_MESSAGE, message })
+type AddMessageType = { type: typeof ADD_MESSAGE, text: string}
+export const addMessage = (text: string): AddMessageType => ({ type: ADD_MESSAGE, text })
 
 type DeleteMessageType = { type: typeof DELETE_MESSAGE, userId: number}
 export const deleteMessage = (userId: number): DeleteMessageType => ({ type: DELETE_MESSAGE, userId })

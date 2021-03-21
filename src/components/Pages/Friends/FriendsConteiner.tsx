@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
-import { requestUsers, follow, unfollow, UserType, FilterType } from '../../../redux/users-Reducer';
 import React, { useEffect } from 'react';
-import { getUsers, getIsFetching, getIsFollowing, getTotalCount, getFilter, getPage, getCount} from '../../../redux/users-selectors';
+import { getUsers, getIsFetching, getIsFollowing, getTotalCount, getFilter, getPage, getCount } from '../../../redux/users-selectors';
 import { AppStateType } from '../../../redux/redux-store';
 import Users from '../Users/Users';
-import Search from './Search';
-import style from './Users.module.scss'
-
+import { UserType, follow, unfollow, requestUsers, FilterType } from '../../../redux/users-Reducer';
+import Search from '../Users/Search';
+import style from '../Users/Users.module.scss'
 
 type MapStateToPropsType = {
 	page: number
@@ -26,28 +25,30 @@ type MapDispatchToPropsType = {
 type OwmPropsType = {}
 type PropsType = MapDispatchToPropsType & MapStateToPropsType & OwmPropsType
 
-const UsersConteiner: React.FC<PropsType> = ({ page, requestUsers, ...props }) => {
+const FriendsConteiner: React.FC<PropsType> = ({ page, requestUsers, ...props }) => {
 
 	useEffect(() => {
-		requestUsers(page, props.count, {term: props.filter.term, friend: null})
+		requestUsers(page, props.count, {term: '', friend: true})
 		// eslint-disable-next-line 
 	}, [])
 	const onPageChanged = (pageNumber: number) => {
 		requestUsers(pageNumber, props.count, props.filter)
 	}
-	const onFilterChanged = (friend: null | boolean,  term: string) => {
-		requestUsers(1, props.count, {term, friend})
+	const onFilterChanged = (friend: null | boolean, term: string) => {
+		requestUsers(1, props.count, { term, friend })
 	}
 
-	
+
 	return (
 		<div className={style.UsersPage}>
 		<Search onFilterChanged={onFilterChanged} filter={props.filter}/>
 		<Users onPageChanged={onPageChanged}
+	
 			follow={props.follow}
 			unfollow={props.unfollow}
 			count={props.count}
 			page={page}
+
 			totalCount={props.totalCount}
 			users={props.users}
 			isFollowing={props.isFollowing}
@@ -55,6 +56,8 @@ const UsersConteiner: React.FC<PropsType> = ({ page, requestUsers, ...props }) =
 		/>
 		</div>
 	)
+
+
 }
 
 
@@ -77,4 +80,4 @@ let mapDispatchToProps = {
 	requestUsers,
 }
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, OwmPropsType, AppStateType>(mapStateToProps, mapDispatchToProps)(UsersConteiner)
+export default connect<MapStateToPropsType, MapDispatchToPropsType, OwmPropsType, AppStateType>(mapStateToProps, mapDispatchToProps)(FriendsConteiner)

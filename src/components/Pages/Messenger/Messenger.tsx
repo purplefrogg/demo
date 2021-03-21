@@ -12,13 +12,13 @@ type PropsType = {
 	chats: Array<ChatsType>
     messages: Array<MessagesType>
 
-	addMessage: (message: string)=>void
+	addMessage: (text: string)=>void
 }
 
 const MessageForm: React.FC<InjectedFormProps<MessagesType>>= (props) => {
     return (
            <form onSubmit={props.handleSubmit}  className={style.input}>
-			   {createField('message', Input, [required], null, {className: style.inputArea})}
+			   {createField('text', Input, [required], null, {className: style.inputArea})}
 				<button className={style.btnEnter}>enter</button>
 			</form>
     )

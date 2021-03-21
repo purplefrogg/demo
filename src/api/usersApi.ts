@@ -1,10 +1,12 @@
+import { UserType } from "../redux/users-Reducer";
 import { GetItemsType, instance, APIResponseType } from "./api";
 
 
 
 export const usersApi = ({
-    getUsers(page: number, count: number) {
-        return instance.get<GetItemsType>(`users?page=${page}&count=${count}`)
+    getUsers(page: number, count: number, friend: null | boolean = null, term='') {
+        return instance.get<GetItemsType<UserType>>(`users?page=${page}&count=${count}` +
+        (term ? `&term=${term}` : '') + (friend === null ? '' : `&friend=${friend}`) )
         .then(res => {
             return res.data
         })

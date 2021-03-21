@@ -1,5 +1,4 @@
 import axios from "axios"
-import { UserType } from "../redux/users-Reducer"
 
 export const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -18,8 +17,8 @@ export enum ResultCodeCaptchaEnum {
     captchaIsRequired = 10
 }
 
-export type GetItemsType = {
-    items: Array<UserType>
+export type GetItemsType<T> = {
+    items: Array<T>
     totalCount: number
     error: string | null
 }

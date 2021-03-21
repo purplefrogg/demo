@@ -11,6 +11,7 @@ import { connect, Provider } from 'react-redux';
 import Preloader from './components/common/Preloader/preloader';
 import store, { AppStateType } from './redux/redux-store'
 import withSuspense from './components/hoc/withSuspense';
+import FriendsConteiner from './components/Pages/Friends/FriendsConteiner';
 const MessengerConteiner = React.lazy(() => import('./components/Pages/Messenger/MessengerConteiner'));
 const UsersConteiner = React.lazy(() => import('./components/Pages/Users/UsersConteiner'));
 const ProfileConteiner = React.lazy(() => import('./components/Pages/Profile/ProfileConteiner'));
@@ -51,7 +52,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
 						<Route path='/News' render={() => <NewsConteiner />} />
 						<Route path='/Login' render={withSuspense(Login)} />
 						<Route path='/Profile/:userId?' render={withSuspense(ProfileConteiner)} />
-						<Route path='/Friends' render={() => null } />
+						<Route path='/Friends' render={() => <FriendsConteiner/> } />
 					
 						<Route path='*' render={() => { return <div>404 not found</div>}} />
 						

@@ -3,7 +3,6 @@ import { UserType } from '../../../redux/users-Reducer';
 import Paginator from '../../common/Paginator/Paginator';
 import Preloader from '../../common/Preloader/preloader';
 import User from './User';
-import style from './Users.module.scss'
 
 type PropsType = {
 	page: number
@@ -13,10 +12,10 @@ type PropsType = {
 	isFollowing: Array<number>
 	isFetching: boolean
 
-
-	follow: (id: number)=> void
-	unfollow: (id: number)=> void
-	onPageChanged: (pageNumber: number) => void
+	follow: (id: number) => void
+	unfollow: (id: number) => void
+	onPageChanged:  (pageNumber: number) => void
+	
 }
 
 const Users: FC<PropsType> = (props) => {
@@ -25,8 +24,9 @@ const Users: FC<PropsType> = (props) => {
 		page={props.page}
 		onPageChanged={props.onPageChanged} />
 	return (
-		<div className={style.UsersPage}>
-			{Paginators}
+		<div>
+			
+			{props.totalCount > props.count && Paginators}
 			{props.isFetching ? <Preloader /> : <div >
 				{props.users.map((user: UserType) => <User user={user}
 					isFollowing={props.isFollowing}
@@ -34,7 +34,7 @@ const Users: FC<PropsType> = (props) => {
 					key={user.id}
 					unfollow={props.unfollow}
 				/>)}
-				{Paginators}
+				{props.totalCount > props.count && Paginators}
 			</div>}
 		</div>
 	)
