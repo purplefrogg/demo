@@ -1,80 +1,54 @@
-import { connect } from 'react-redux';
-import { requestUsers, follow, unfollow, UserType, FilterType } from '../../../redux/users-Reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { requestUsers, follow, unfollow } from '../../../redux/users-Reducer';
 import React, { useEffect } from 'react';
-import { getUsers, getIsFetching, getIsFollowing, getTotalCount, getFilter, getPage, getCount} from '../../../redux/users-selectors';
-import { AppStateType } from '../../../redux/redux-store';
+import { getUsers, getFilter, getPage, getCount } from '../../../redux/users-selectors';
 import Users from '../Users/Users';
 import Search from './Search';
 import style from './Users.module.scss'
 
 
-type MapStateToPropsType = {
-	page: number
-	count: number
-	totalCount: number
-	users: Array<UserType>
-	isFollowing: Array<number>
-	isFetching: boolean
-	filter: FilterType
-}
 
-type MapDispatchToPropsType = {
-	follow: (id: number) => void
-	unfollow: (id: number) => void
-	requestUsers: (page: number, count: number, filter: FilterType) => void
-}
-type OwmPropsType = {}
-type PropsType = MapDispatchToPropsType & MapStateToPropsType & OwmPropsType
 
-const UsersConteiner: React.FC<PropsType> = ({ page, requestUsers, ...props }) => {
+type PropsType = {}
 
+const UserPage: React.FC<PropsType> = () => {
+	const users = useSelector(getUsers)
+	const page = useSelector(getPage)
+	const count = useSelector(getCount)
+	const filter = useSelector(getFilter)
+	const dispatch = useDispatch()
+	
+	
 	useEffect(() => {
-		requestUsers(page, props.count, {term: props.filter.term, friend: null})
+		dispatch(requestUsers(page, count, { term: filter.term, friend: null }))
 		// eslint-disable-next-line 
 	}, [])
 	const onPageChanged = (pageNumber: number) => {
-		requestUsers(pageNumber, props.count, props.filter)
+		dispatch(requestUsers(pageNumber, count, filter))
 	}
-	const onFilterChanged = (friend: null | boolean,  term: string) => {
-		requestUsers(1, props.count, {term, friend})
+	const onFilterChanged = (friend: null | boolean, term: string) => {
+		dispatch(requestUsers(1, count, { term, friend }))
 	}
 
-	
+	const Follow = (id: number) => {
+		dispatch(follow(id))
+	}
+	const unFollow = (id: number) => {
+		dispatch(unfollow(id))
+	}
 	return (
 		<div className={style.UsersPage}>
-		<Search onFilterChanged={onFilterChanged} filter={props.filter}/>
-		<Users onPageChanged={onPageChanged}
-			follow={props.follow}
-			unfollow={props.unfollow}
-			count={props.count}
-			page={page}
-			totalCount={props.totalCount}
-			users={props.users}
-			isFollowing={props.isFollowing}
-			isFetching={props.isFetching}
-		/>
+			<Search onFilterChanged={onFilterChanged} filter={filter} />
+			<Users onPageChanged={onPageChanged}
+				follow={Follow}
+				unfollow={unFollow}
+				count={count}
+				page={page}
+				users={users}
+			/>
 		</div>
 	)
 }
 
 
-let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-
-	return {
-		users: getUsers(state),
-		totalCount: getTotalCount(state),
-		page: getPage(state),
-		count: getCount(state),
-		isFetching: getIsFetching(state),
-		isFollowing: getIsFollowing(state),
-		filter: getFilter(state)
-	}
-}
-
-let mapDispatchToProps = {
-	follow,
-	unfollow,
-	requestUsers,
-}
-
-export default connect<MapStateToPropsType, MapDispatchToPropsType, OwmPropsType, AppStateType>(mapStateToProps, mapDispatchToProps)(UsersConteiner)
+export default UserPage

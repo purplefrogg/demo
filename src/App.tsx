@@ -13,9 +13,9 @@ import store, { AppStateType } from './redux/redux-store'
 import withSuspense from './components/hoc/withSuspense';
 import FriendsConteiner from './components/Pages/Friends/FriendsConteiner';
 const MessengerConteiner = React.lazy(() => import('./components/Pages/Messenger/MessengerConteiner'));
-const UsersConteiner = React.lazy(() => import('./components/Pages/Users/UsersConteiner'));
+const UserPage = React.lazy(() => import('./components/Pages/Users/UsersConteiner'));
 const ProfileConteiner = React.lazy(() => import('./components/Pages/Profile/ProfileConteiner'));
-const Login = React.lazy(() => import('./components/Login/Login'));
+const Login = React.lazy(() => import('./components/Pages/Login/Login'));
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 
@@ -48,7 +48,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
 						<Switch>
 						<Route exact path='/' render={() => { return <Redirect to={'/Profile'}/>}} />
 						<Route path='/Messenger' render={withSuspense(MessengerConteiner)}/>
-						<Route path='/Users' render={withSuspense(UsersConteiner)} />
+						<Route path='/Users' render={withSuspense(UserPage)} />
 						<Route path='/News' render={() => <NewsConteiner />} />
 						<Route path='/Login' render={withSuspense(Login)} />
 						<Route path='/Profile/:userId?' render={withSuspense(ProfileConteiner)} />
