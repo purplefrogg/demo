@@ -14,8 +14,8 @@ export type UserType = {
     
 }
 export type FilterType = {
-    term: string
-    friend: null | boolean
+    term?: string
+    friend?: null | boolean
 }
 
 let initialState = {
@@ -26,9 +26,9 @@ let initialState = {
     isFetching: true as boolean,
     isFollowing: [] as Array<number>,
     filter: {
-        term: '' as string,
-        friend: null as null | boolean
-    },
+        term: '' ,
+        friend: null 
+    } as FilterType,
 }
 const usersReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {

@@ -11,9 +11,8 @@ import { connect, Provider } from 'react-redux';
 import Preloader from './components/common/Preloader/preloader';
 import store, { AppStateType } from './redux/redux-store'
 import withSuspense from './components/hoc/withSuspense';
-import FriendsConteiner from './components/Pages/Friends/FriendsConteiner';
 const MessengerConteiner = React.lazy(() => import('./components/Pages/Messenger/MessengerConteiner'));
-const UserPage = React.lazy(() => import('./components/Pages/Users/UsersConteiner'));
+const Users = React.lazy(() => import('./components/Pages/Users/Users'));
 const ProfileConteiner = React.lazy(() => import('./components/Pages/Profile/ProfileConteiner'));
 const Login = React.lazy(() => import('./components/Pages/Login/Login'));
 
@@ -48,11 +47,11 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
 						<Switch>
 						<Route exact path='/' render={() => { return <Redirect to={'/Profile'}/>}} />
 						<Route path='/Messenger' render={withSuspense(MessengerConteiner)}/>
-						<Route path='/Users' render={withSuspense(UserPage)} />
+						<Route path='/Users' render={withSuspense(Users)} />
 						<Route path='/News' render={() => <NewsConteiner />} />
 						<Route path='/Login' render={withSuspense(Login)} />
 						<Route path='/Profile/:userId?' render={withSuspense(ProfileConteiner)} />
-						<Route path='/Friends' render={() => <FriendsConteiner/> } />
+						<Route path='/Friends' render={() => <div>page doesn't exit</div> } />
 					
 						<Route path='*' render={() => { return <div>404 not found</div>}} />
 						

@@ -1,18 +1,18 @@
-import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
+import React, { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { UserType } from '../../../redux/users-Reducer';
-import { getIsFetching, getIsFollowing, getTotalCount } from '../../../redux/users-selectors';
+import { getCount, getIsFetching, getIsFollowing, getPage, getTotalCount, getUsers, getUsersFilter } from '../../../redux/users-selectors';
 import Paginator from '../../common/Paginator/Paginator';
 import Preloader from '../../common/Preloader/preloader';
 import User from './User';
+import { requestUsers, follow, unfollow } from '../../../redux/users-Reducer';
+import Search from './Search';
+import { useHistory } from 'react-router-dom';
+import * as queryString from 'querystring'
+import style from './Users.module.scss'
 
 type PropsType = {
-	page: number
-	count: number
-	users: Array<UserType>
-	follow: (id: number) => void
-	unfollow: (id: number) => void
-	onPageChanged:  (pageNumber: number) => void
+	
 	
 }
 
@@ -20,26 +20,68 @@ const Users: FC<PropsType> = (props) => {
 	const totalCount = useSelector(getTotalCount)
 	const isFetching = useSelector(getIsFetching)
 	const isFollowing = useSelector(getIsFollowing)
+	const users = useSelector(getUsers)
+	const page = useSelector(getPage)
+	const count = useSelector(getCount)
+	const filter = useSelector(getUsersFilter)
+	const dispatch = useDispatch()
+	const history = useHistory()
 
+	
+	const onPageChanged = (pageNumber: number) => {
+		dispatch(requestUsers(pageNumber, count, filter))
+	}
+	const onFilterChanged = (friend: null | boolean, term: string) => {
+		dispatch(requestUsers(1, count, { term, friend }))
+	}
 
-	let Paginators = <Paginator count={props.count}
+	const Follow = (id: number) => {
+		dispatch(follow(id))
+	}
+	const unFollow = (id: number) => {
+		dispatch(unfollow(id))
+	}
+
+	
+	
+	useEffect(() => {
+		const parsed: any = queryString.parse(history.location.search.substr(1)) 
+		let actualPage = page
+		let actualFilter = filter
+
+		if(!!parsed.page) actualPage = +parsed.page
+		if(!!parsed.term) actualFilter.term = parsed.term
+		actualFilter.friend = parsed.friend === 'null' ? null : parsed.friend === 'true' ? true : false
+		dispatch(requestUsers(actualPage, count, {term: actualFilter.term, friend: actualFilter.friend}))
+		// eslint-disable-next-line 
+	}, [])
+	useEffect(() => {
+		history.push({
+			pathname: '/users',
+			search: `?term=${filter.term}
+			&friend=${filter.friend === null ? 'null' : filter.friend === true ? 'true' : 'false'}
+			&page=${page}`
+		})
+	}, [filter, page])
+	
+	let Paginators = <Paginator count={count}
 		totalCount={totalCount}
-		page={props.page}
-		onPageChanged={props.onPageChanged} />
-
+		page={page}
+		onPageChanged={onPageChanged} />
+	
 
 	return (
-		<div>
-			
-			{totalCount > props.count && Paginators}
+		<div className={style.UsersPage}>
+			<Search onFilterChanged={onFilterChanged} />
+			{totalCount > count && Paginators}
 			{isFetching ? <Preloader /> : <div >
-				{props.users.map((user: UserType) => <User user={user}
+				{users.map((user: UserType) => <User user={user}
 					isFollowing={isFollowing}
-					follow={props.follow}
+					follow={Follow}
 					key={user.id}
-					unfollow={props.unfollow}
+					unfollow={unFollow}
 				/>)}
-				{totalCount > props.count && Paginators}
+				{totalCount > count && Paginators}
 			</div>}
 		</div>
 	)
